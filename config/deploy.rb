@@ -1,7 +1,7 @@
 set :application, "musikschule"
 set :repository, "/var/www/htdocs/web4/files/repositories/git/test.git"
 set :local_repository,  "~/ruby/railsTest/musikschule/.git"
-set :server, "railshosting.de"
+set :domain, "railshosting.de"
 
 set :deploy_to, "/var/www/htdocs/web4/files/rails/#{application}"
 set :symlink_path, "/var/www/htdocs/web4/html/rails/#{application}"
@@ -14,9 +14,9 @@ set :use_sudo, false
 
 set :deploy_via, :remote_cache
 
-role :app, server
-role :web, server
-role :db,  server, :primary => true
+role :app, domain
+role :web, domain
+role :db,  domain, :primary => true
 
 # copy shared files after update
 task :update_config, :roles => :app do
