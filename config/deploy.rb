@@ -1,5 +1,5 @@
 set :application, "musikschule"
-set :repository, "/var/www/htdocs/web4/files/repositories/git/test.git"
+set :repository, "/var/www/htdocs/web4/files/repositories/git/musikschule.git"
 set :local_repository,  "~/ruby/railsTest/musikschule/.git"
 set :domain, "railshosting.de"
 
