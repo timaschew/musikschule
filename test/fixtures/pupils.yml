@@ -1,0 +1,900 @@
+f1:
+  id: 1
+  firstname: Godehilda
+  lastname: Bertland
+  phone: 015817791
+  birthday: 1984-6-15
+  gender: false
+  flags: 0
+
+f2:
+  id: 2
+  firstname: Marhilde
+  lastname: Franzmarsch
+  phone: 096129756
+  birthday: 1997-5-1
+  gender: false
+  flags: 0
+
+f3:
+  id: 3
+  firstname: Mundtrud
+  lastname: Eckfeld
+  phone: 058518062
+  birthday: 1980-12-23
+  gender: false
+  flags: 0
+
+f4:
+  id: 4
+  firstname: Franze
+  lastname: Neuberg
+  phone: 064218204
+  birthday: 1981-11-9
+  gender: false
+  flags: 0
+
+f5:
+  id: 5
+  firstname: Frank
+  lastname: Stettmarsch
+  phone: 09158944
+  birthday: 1963-1-14
+  gender: true
+  flags: 0
+
+f6:
+  id: 6
+  firstname: Eckinde
+  lastname: Wartmarsch
+  phone: 033259564
+  birthday: 1991-11-7
+  gender: false
+  flags: 0
+
+f7:
+  id: 7
+  firstname: Friedinde
+  lastname: Kunifurt
+  phone: 036506480
+  birthday: 1972-9-8
+  gender: false
+  flags: 0
+
+f8:
+  id: 8
+  firstname: Gottfried
+  lastname: Wartmarsch
+  phone: 043847414
+  birthday: 1982-7-12
+  gender: true
+  flags: 0
+
+f9:
+  id: 9
+  firstname: Munda
+  lastname: Kurtland
+  phone: 010039817
+  birthday: 2004-6-13
+  gender: false
+  flags: 0
+
+f10:
+  id: 10
+  firstname: Adela
+  lastname: Nordberg
+  phone: 051167012
+  birthday: 1972-11-19
+  gender: false
+  flags: 0
+
+f11:
+  id: 11
+  firstname: Helmtrud
+  lastname: Furtenberg
+  phone: 030714125
+  birthday: 1971-8-20
+  gender: false
+  flags: 0
+
+f12:
+  id: 12
+  firstname: Marinde
+  lastname: Halberfurt
+  phone: 02649444
+  birthday: 1975-11-9
+  gender: false
+  flags: 0
+
+f13:
+  id: 13
+  firstname: Friedinde
+  lastname: Weststett
+  phone: 066150549
+  birthday: 1969-1-7
+  gender: false
+  flags: 0
+
+f14:
+  id: 14
+  firstname: Gotta
+  lastname: Stetttal
+  phone: 018867852
+  birthday: 1963-11-16
+  gender: false
+  flags: 0
+
+f15:
+  id: 15
+  firstname: Franzhardt
+  lastname: Furtenberg
+  phone: 034827330
+  birthday: 1997-4-16
+  gender: true
+  flags: 0
+
+f16:
+  id: 16
+  firstname: Gertrud
+  lastname: Dorftal
+  phone: 05370129
+  birthday: 2004-10-2
+  gender: false
+  flags: 0
+
+f17:
+  id: 17
+  firstname: Eckmar
+  lastname: Braunland
+  phone: 010007304
+  birthday: 1995-6-16
+  gender: true
+  flags: 0
+
+f18:
+  id: 18
+  firstname: Kunihardt
+  lastname: Edgau
+  phone: 027129753
+  birthday: 1975-5-2
+  gender: true
+  flags: 0
+
+f19:
+  id: 19
+  firstname: Karla
+  lastname: Eckland
+  phone: 059249033
+  birthday: 1998-8-26
+  gender: false
+  flags: 0
+
+f20:
+  id: 20
+  firstname: Agoinde
+  lastname: Sigismarsch
+  phone: 043230564
+  birthday: 1964-12-18
+  gender: false
+  flags: 0
+
+f21:
+  id: 21
+  firstname: Karl
+  lastname: Bischofmarsch
+  phone: 068573092
+  birthday: 1985-11-2
+  gender: true
+  flags: 0
+
+f22:
+  id: 22
+  firstname: Konrad
+  lastname: Bardland
+  phone: 067647125
+  birthday: 1964-11-20
+  gender: true
+  flags: 0
+
+f23:
+  id: 23
+  firstname: Godehilm
+  lastname: Sigismarsch
+  phone: 067821547
+  birthday: 1978-11-3
+  gender: true
+  flags: 0
+
+f24:
+  id: 24
+  firstname: Godhilm
+  lastname: Kaiserland
+  phone: 057953046
+  birthday: 1981-7-17
+  gender: true
+  flags: 0
+
+f25:
+  id: 25
+  firstname: Franzrich
+  lastname: Vaterfeld
+  phone: 057307082
+  birthday: 1974-10-14
+  gender: true
+  flags: 0
+
+f26:
+  id: 26
+  firstname: Mannhilde
+  lastname: Wiesenfurt
+  phone: 072951387
+  birthday: 1991-2-27
+  gender: false
+  flags: 0
+
+f27:
+  id: 27
+  firstname: Agobard
+  lastname: Sigisland
+  phone: 038852524
+  birthday: 1966-4-1
+  gender: true
+  flags: 0
+
+f28:
+  id: 28
+  firstname: Agoinde
+  lastname: Edgau
+  phone: 018086410
+  birthday: 1964-2-12
+  gender: false
+  flags: 0
+
+f29:
+  id: 29
+  firstname: Godhilm
+  lastname: Bardberg
+  phone: 086715854
+  birthday: 1980-10-6
+  gender: true
+  flags: 0
+
+f30:
+  id: 30
+  firstname: Kurtmund
+  lastname: Bertland
+  phone: 093401401
+  birthday: 1990-3-19
+  gender: true
+  flags: 0
+
+f31:
+  id: 31
+  firstname: Brandhilde
+  lastname: Blauhûs
+  phone: 066845736
+  birthday: 1961-4-12
+  gender: false
+  flags: 0
+
+f32:
+  id: 32
+  firstname: Marka
+  lastname: Oswald
+  phone: 058262926
+  birthday: 1986-5-25
+  gender: false
+  flags: 0
+
+f33:
+  id: 33
+  firstname: Franze
+  lastname: Furtengau
+  phone: 057553046
+  birthday: 1997-5-18
+  gender: false
+  flags: 0
+
+f34:
+  id: 34
+  firstname: Gera
+  lastname: Sigisland
+  phone: 011694856
+  birthday: 1964-3-9
+  gender: false
+  flags: 0
+
+f35:
+  id: 35
+  firstname: Friedinde
+  lastname: Konradmarsch
+  phone: 088573686
+  birthday: 1961-12-24
+  gender: false
+  flags: 0
+
+f36:
+  id: 36
+  firstname: Gotttrud
+  lastname: Meinweiler
+  phone: 077386462
+  birthday: 2002-7-15
+  gender: false
+  flags: 0
+
+f37:
+  id: 37
+  firstname: Konradbard
+  lastname: Kuniried
+  phone: 033440726
+  birthday: 1996-9-22
+  gender: true
+  flags: 0
+
+f38:
+  id: 38
+  firstname: Mundtrud
+  lastname: Agofurt
+  phone: 051120722
+  birthday: 1961-3-8
+  gender: false
+  flags: 0
+
+f39:
+  id: 39
+  firstname: Godhilm
+  lastname: Sigisfeld
+  phone: 041936650
+  birthday: 1971-8-10
+  gender: true
+  flags: 0
+
+f40:
+  id: 40
+  firstname: Godhilde
+  lastname: Steingau
+  phone: 046577892
+  birthday: 1970-4-21
+  gender: false
+  flags: 0
+
+f41:
+  id: 41
+  firstname: Godtrud
+  lastname: Furtengau
+  phone: 051712129
+  birthday: 1960-4-7
+  gender: false
+  flags: 0
+
+f42:
+  id: 42
+  firstname: Konrad
+  lastname: Sigismarsch
+  phone: 05781611
+  birthday: 1997-11-19
+  gender: true
+  flags: 0
+
+f43:
+  id: 43
+  firstname: Gottinde
+  lastname: Markgau
+  phone: 074517477
+  birthday: 1981-7-10
+  gender: false
+  flags: 0
+
+f44:
+  id: 44
+  firstname: Kunihardt
+  lastname: Furtenberg
+  phone: 034064094
+  birthday: 1973-5-10
+  gender: true
+  flags: 0
+
+f45:
+  id: 45
+  firstname: Agobard
+  lastname: Furtenberg
+  phone: 010150563
+  birthday: 1997-2-12
+  gender: true
+  flags: 0
+
+f46:
+  id: 46
+  firstname: Godric
+  lastname: Markgau
+  phone: 035235314
+  birthday: 1989-10-9
+  gender: true
+  flags: 0
+
+f47:
+  id: 47
+  firstname: Frank
+  lastname: Bertfeld
+  phone: 064110546
+  birthday: 1996-3-7
+  gender: true
+  flags: 0
+
+f48:
+  id: 48
+  firstname: Franza
+  lastname: Kurtfurt
+  phone: 04802666
+  birthday: 1998-10-22
+  gender: false
+  flags: 0
+
+f49:
+  id: 49
+  firstname: Godtrud
+  lastname: Konradmarsch
+  phone: 081829741
+  birthday: 1982-11-11
+  gender: false
+  flags: 0
+
+f50:
+  id: 50
+  firstname: Adela
+  lastname: Ringfurt
+  phone: 037469091
+  birthday: 1969-7-3
+  gender: false
+  flags: 0
+
+f51:
+  id: 51
+  firstname: Hardta
+  lastname: Kunifurt
+  phone: 028266564
+  birthday: 1969-3-13
+  gender: false
+  flags: 0
+
+f52:
+  id: 52
+  firstname: Franz
+  lastname: Bardgau
+  phone: 062382128
+  birthday: 1971-7-24
+  gender: true
+  flags: 0
+
+f53:
+  id: 53
+  firstname: Osfried
+  lastname: Agofurt
+  phone: 043700084
+  birthday: 1994-12-26
+  gender: true
+  flags: 0
+
+f54:
+  id: 54
+  firstname: Eckhilde
+  lastname: Wiesfurt
+  phone: 058230655
+  birthday: 1977-6-9
+  gender: false
+  flags: 0
+
+f55:
+  id: 55
+  firstname: Kunia
+  lastname: Frankwald
+  phone: 077464524
+  birthday: 2001-2-13
+  gender: false
+  flags: 0
+
+f56:
+  id: 56
+  firstname: Franzrich
+  lastname: Stettland
+  phone: 078818835
+  birthday: 1963-3-16
+  gender: true
+  flags: 0
+
+f57:
+  id: 57
+  firstname: Gotthilf
+  lastname: Dorftal
+  phone: 045506458
+  birthday: 1999-4-17
+  gender: true
+  flags: 0
+
+f58:
+  id: 58
+  firstname: Markfried
+  lastname: Edfeld
+  phone: 096065967
+  birthday: 1970-12-11
+  gender: true
+  flags: 0
+
+f59:
+  id: 59
+  firstname: Godehilm
+  lastname: Bardberg
+  phone: 052208893
+  birthday: 1979-3-1
+  gender: true
+  flags: 0
+
+f60:
+  id: 60
+  firstname: Godhilda
+  lastname: Edfurt
+  phone: 038735588
+  birthday: 1970-12-26
+  gender: false
+  flags: 0
+
+f61:
+  id: 61
+  firstname: Gottlieb
+  lastname: Edfurt
+  phone: 074011572
+  birthday: 1967-8-18
+  gender: true
+  flags: 0
+
+f62:
+  id: 62
+  firstname: Kurt
+  lastname: Kindtal
+  phone: 063405428
+  birthday: 1968-6-19
+  gender: true
+  flags: 0
+
+f63:
+  id: 63
+  firstname: Gotthilm
+  lastname: Schwarzfeld
+  phone: 087987161
+  birthday: 1998-11-10
+  gender: true
+  flags: 0
+
+f64:
+  id: 64
+  firstname: Eckinde
+  lastname: Wartmarsch
+  phone: 094999283
+  birthday: 1965-5-13
+  gender: false
+  flags: 0
+
+f65:
+  id: 65
+  firstname: Franzhardt
+  lastname: Oswald
+  phone: 053006815
+  birthday: 1987-1-15
+  gender: true
+  flags: 0
+
+f66:
+  id: 66
+  firstname: Hardta
+  lastname: Jagstfurt
+  phone: 084780977
+  birthday: 1975-1-24
+  gender: false
+  flags: 0
+
+f67:
+  id: 67
+  firstname: Konrad
+  lastname: Franzmarsch
+  phone: 033930963
+  birthday: 1983-7-12
+  gender: true
+  flags: 0
+
+f68:
+  id: 68
+  firstname: Friedhilda
+  lastname: Richmarsch
+  phone: 042630697
+  birthday: 1968-6-16
+  gender: false
+  flags: 0
+
+f69:
+  id: 69
+  firstname: Godehilda
+  lastname: Schönwiesen
+  phone: 078806523
+  birthday: 1981-1-15
+  gender: false
+  flags: 0
+
+f70:
+  id: 70
+  firstname: Adela
+  lastname: Kuniwald
+  phone: 09765405
+  birthday: 1979-3-26
+  gender: false
+  flags: 0
+
+f71:
+  id: 71
+  firstname: Gertrud
+  lastname: Immelhaus
+  phone: 076345921
+  birthday: 2000-7-7
+  gender: false
+  flags: 0
+
+f72:
+  id: 72
+  firstname: Agoinde
+  lastname: Halberfurt
+  phone: 092940792
+  birthday: 1968-8-19
+  gender: false
+  flags: 0
+
+f73:
+  id: 73
+  firstname: Gerwart
+  lastname: Frankberg
+  phone: 028258441
+  birthday: 1963-10-10
+  gender: true
+  flags: 0
+
+f74:
+  id: 74
+  firstname: Wilhilde
+  lastname: Wilhelm
+  phone: 055433562
+  birthday: 1996-12-10
+  gender: false
+  flags: 0
+
+f75:
+  id: 75
+  firstname: Edhilda
+  lastname: Vaterfeld
+  phone: 028405390
+  birthday: 1969-4-2
+  gender: false
+  flags: 0
+
+f76:
+  id: 76
+  firstname: Agomar
+  lastname: Adelstadt
+  phone: 050892410
+  birthday: 1986-12-20
+  gender: true
+  flags: 0
+
+f77:
+  id: 77
+  firstname: Godelieb
+  lastname: Edfeld
+  phone: 031094164
+  birthday: 1985-11-17
+  gender: true
+  flags: 0
+
+f78:
+  id: 78
+  firstname: Frankwart
+  lastname: Steingau
+  phone: 014127115
+  birthday: 1976-12-12
+  gender: true
+  flags: 0
+
+f79:
+  id: 79
+  firstname: Eckbrand
+  lastname: Braunland
+  phone: 074246852
+  birthday: 1985-9-16
+  gender: true
+  flags: 0
+
+f80:
+  id: 80
+  firstname: Frank
+  lastname: Furtenfeld
+  phone: 077252282
+  birthday: 1966-8-12
+  gender: true
+  flags: 0
+
+f81:
+  id: 81
+  firstname: Meininde
+  lastname: Kreuzen
+  phone: 01050724
+  birthday: 1978-7-7
+  gender: false
+  flags: 0
+
+f82:
+  id: 82
+  firstname: Brandhilde
+  lastname: Kurttal
+  phone: 045373551
+  birthday: 1969-7-6
+  gender: false
+  flags: 0
+
+f83:
+  id: 83
+  firstname: Frank
+  lastname: Edfurt
+  phone: 099358231
+  birthday: 1988-11-15
+  gender: true
+  flags: 0
+
+f84:
+  id: 84
+  firstname: Godehilm
+  lastname: Dorftal
+  phone: 062478515
+  birthday: 1963-10-10
+  gender: true
+  flags: 0
+
+f85:
+  id: 85
+  firstname: Gera
+  lastname: Bardgau
+  phone: 048058506
+  birthday: 1971-5-17
+  gender: false
+  flags: 0
+
+f86:
+  id: 86
+  firstname: Kurt
+  lastname: Frankberg
+  phone: 012342839
+  birthday: 1988-3-3
+  gender: true
+  flags: 0
+
+f87:
+  id: 87
+  firstname: Gera
+  lastname: Furtland
+  phone: 096922934
+  birthday: 1988-4-13
+  gender: false
+  flags: 0
+
+f88:
+  id: 88
+  firstname: Hardta
+  lastname: Mannmarsch
+  phone: 055141915
+  birthday: 2004-7-20
+  gender: false
+  flags: 0
+
+f89:
+  id: 89
+  firstname: Godhilda
+  lastname: Gänsewiesen
+  phone: 091234364
+  birthday: 1980-11-20
+  gender: false
+  flags: 0
+
+f90:
+  id: 90
+  firstname: Konrad
+  lastname: Markberg
+  phone: 062353989
+  birthday: 1960-5-28
+  gender: true
+  flags: 0
+
+f91:
+  id: 91
+  firstname: Franzwald
+  lastname: Vaterfeld
+  phone: 040334695
+  birthday: 1960-5-16
+  gender: true
+  flags: 0
+
+f92:
+  id: 92
+  firstname: Adelwart
+  lastname: Dorftal
+  phone: 065984032
+  birthday: 1962-12-21
+  gender: true
+  flags: 0
+
+f93:
+  id: 93
+  firstname: Frankmund
+  lastname: Hardtmarsch
+  phone: 034560060
+  birthday: 1968-11-19
+  gender: true
+  flags: 0
+
+f94:
+  id: 94
+  firstname: Marktrud
+  lastname: Mannmarsch
+  phone: 03919676
+  birthday: 1966-12-12
+  gender: false
+  flags: 0
+
+f95:
+  id: 95
+  firstname: Frank
+  lastname: Kuniwald
+  phone: 095702069
+  birthday: 1978-4-20
+  gender: true
+  flags: 0
+
+f96:
+  id: 96
+  firstname: Frankwart
+  lastname: Kreuzen
+  phone: 028788155
+  birthday: 1995-1-21
+  gender: true
+  flags: 0
+
+f97:
+  id: 97
+  firstname: Mundtrud
+  lastname: Albers
+  phone: 066397982
+  birthday: 1967-5-12
+  gender: false
+  flags: 0
+
+f98:
+  id: 98
+  firstname: Gottinde
+  lastname: Querfeld
+  phone: 06931678
+  birthday: 1989-4-21
+  gender: false
+  flags: 0
+
+f99:
+  id: 99
+  firstname: Gotttrud
+  lastname: Markberg
+  phone: 047543435
+  birthday: 2003-1-15
+  gender: false
+  flags: 0
+
+f100:
+  id: 100
+  firstname: Frank
+  lastname: Konradmarsch
+  phone: 019641320
+  birthday: 2002-9-10
+  gender: true
+  flags: 0
+

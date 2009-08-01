@@ -1,0 +1,28 @@
+<h1>Listing teachers</h1>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Phone</th>
+    <th>Birthday</th>
+    <th>Comment</th>
+  </tr>
+
+<% @teachers.each do |teacher| %>
+  <tr>
+    <td><%=h teacher.firstname %></td>
+    <td><%=h teacher.lastname %></td>
+    <td><%=h teacher.phone %></td>
+    <td><%=h teacher.birthday %></td>
+    <td><%=h teacher.comment %></td>
+    <td><%= link_to 'Show', teacher %></td>
+    <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
+    <td><%= link_to 'Destroy', teacher, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New teacher', new_teacher_path %>

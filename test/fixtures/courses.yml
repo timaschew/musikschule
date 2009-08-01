@@ -1,0 +1,122 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+
+1:
+  id: 1
+  name: "Gitarre 1"
+  room_id: 3
+  weekday: 1
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 3
+  teacher_id: 7
+
+2:
+  id: 2
+  name: "Gitarre 2"
+  room_id: 3
+  weekday: 1
+  start: "15:00"
+  duration: "16:00"
+  subject_id: 3
+  teacher_id: 7
+  
+3:
+  id: 3
+  name: "Gitarre 3"
+  room_id: 3
+  weekday: 1
+  start: "16:00"
+  duration: "17:00"
+  subject_id: 3
+  teacher_id: 7
+
+4:
+  id: 4
+  name: "Klavier 1"
+  room_id: 3
+  weekday: 1
+  start: "18:00"
+  duration: "19:00"
+  subject_id: 1
+  teacher_id: 5
+
+5:
+  id: 5
+  name: "Klavier 2"
+  room_id: 3
+  weekday: 1
+  start: "19:00"
+  duration: "20:00"
+  subject_id: 1
+  teacher_id: 5
+
+6:
+  id: 6
+  name: "Schlagzeug 1"
+  room_id: 3
+  weekday: 2
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 6
+  teacher_id: 6
+
+7:
+  id: 7
+  name: "Schlagzeug 2"
+  room_id: 3
+  weekday: 2
+  start: "15:00"
+  duration: "16:00"
+  subject_id: 6
+  teacher_id: 6
+
+#8:
+#  name: "Gesang R1"
+#  room_id: 1
+#  weekday: 1
+#  start: "14:00"
+#  duration: "15:00"
+#  subject_id: 8
+#  teacher_id: 8
+  
+9:
+  id: 9
+  name: "Gesang R2"
+  room_id: 2
+  weekday: 1
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 8
+  teacher_id: 8
+  
+10:
+  id: 10
+  name: "Gesang R4"
+  room_id: 4
+  weekday: 1
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 8
+  teacher_id: 8
+  
+11:
+  id: 11
+  name: "Gesang R5"
+  room_id: 5
+  weekday: 1
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 8
+  teacher_id: 8
+  
+12:
+  id: 12
+  name: "Gesang R6"
+  room_id: 6
+  weekday: 1
+  start: "14:00"
+  duration: "15:00"
+  subject_id: 8
+  teacher_id: 8
+  

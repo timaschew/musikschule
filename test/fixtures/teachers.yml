@@ -1,0 +1,59 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+igor:
+  id: 2
+  firstname: Igor
+  lastname: Wilhelm
+  phone: 04952168471
+  birthday: 1965-01-01
+
+valentina:
+  id: 1
+  firstname: Valentina
+  lastname: Wilhelm
+  phone: 04952168471
+  birthday: 1965-07-14
+  comment: Schulleiterin
+
+elena:
+  id: 3
+  firstname: Elena
+  lastname: Root
+  phone: 04952112334
+  birthday: 1960-09-19
+
+jatina:
+  id: 4
+  firstname: Jantina
+  lastname: vom Hagen
+  phone: 0491889424
+  birthday: 1959-02-27
+
+nadeshda:
+  id: 5
+  firstname: Nadeshda
+  lastname: Medwedawa
+  phone: 0491889424
+  birthday: 1979-05-15
+
+alfred:
+  id: 6
+  firstname: Alfred
+  lastname: Rother
+  phone: 0496168471
+  birthday: 1965-02-21
+  comment: Schlagzeuglehrer No.1
+
+joachim:
+  id: 7
+  firstname: Joachim
+  lastname: Schmidt
+  phone: 04956838
+  birthday: 1970-11-13
+
+thorsten:
+  id: 8
+  firstname: Thorsten
+  lastname: Albers
+  phone: 04946134
+  birthday: 1972-06-04

@@ -1,0 +1,35 @@
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% Room.find(:all).each do |r| %>
+			<th><%= r.name %></th>
+		<% end %>
+	</tr>
+	<% time = 9 %>	
+	<% endTime = 20 %>
+	<!-- 14:00 bis 19:00 Uhr => 6 Stunden -->
+	<% (endTime-time).times do %>
+		
+		<tr>
+		<td><%= h time %>:00</td>
+		<% Room.find(:all).map(&:id).each do |r| %>
+			<% tmp = getForStartTimeAndRoom(time, 0, r) %>
+			<% if r == roomID && time.to_i >= startHour.to_i && time.to_i <= endHour.to_i %>
+				<% style = "style=\"background: red;\"" %>
+			<% elsif !tmp.nil? && tmp.key?(:changed) %>
+				<% style = "style=\"background: green;\"" %>
+			<% else %>
+				<% style = "" %>
+			<% end %>
+			<% if !tmp.nil? %>
+				<td <%= style %>><%= Course.find(tmp[:course]).name %></td>
+			<% else %>
+				<td <%= style %>>-</td>
+			<% end %>
+		<% end %> <!-- Raum-Schleife -->
+		</tr>
+		<% time += 1 %>
+	<% end %> <!-- Zeit-Schleife -->
+</table>
+</div>

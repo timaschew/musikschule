@@ -1,0 +1,2 @@
+module PresencelistsHelper
+end

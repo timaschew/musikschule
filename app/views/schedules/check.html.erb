@@ -1,0 +1,24 @@
+<h1>Scheduler</h1>
+
+<h2><%= "Raum ID: " + @roomID.to_s + " am Tag: " + @weekday + " von " + @startHour.to_s + ":" + @startMin.to_s + " bis " + @endHour.to_s + ":" + @endMin.to_s %></h2>
+
+<br/>
+<% if !@scheduleCourses.nil? %>
+	<%= "gefunden Kurse: " + @scheduleCourses.count.to_s %>
+	<br/><br/>
+	<% @scheduleCourses.each do |cID| %>
+		<% c = Course.find(cID) %>
+		<%= "<b>" + c.name + "</b> von " + c.start.strftime("%H:%M") + " bis " + c.duration.strftime("%H:%M") %><br/>
+	<% end %>
+<% end %>
+<hr/>
+
+
+<h3>nach Schritt A</h3>
+
+<%= render :partial => "roomTimeTable", :locals => 
+{ :roomID => @roomID, :startHour => @startHour, :endHour => @endHour } %> 
+
+<%= "B:" + @scheduleBCourses.inspect %>
+<br/>
+<%= "C:" + @scheduleCCourses.inspect %>

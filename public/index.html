@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Ruby on Rails: Welcome aboard</title>
+    <style type="text/css" media="screen">
+      body {
+        margin: 0;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+      }
+      
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
+      
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+      
+      
+      #page {
+        background-color: #f0f0f0;
+        width: 750px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      #content {
+        float: left;
+        background-color: white;
+        border: 3px solid #aaa;
+        border-top: none;
+        padding: 25px;
+        width: 500px;
+      }
+      
+      #sidebar {
+        float: right;
+        width: 175px;
+      }
+
+      #footer {
+        clear: both;
+      }
+      
+
+      #header, #about, #getting-started {
+        padding-left: 75px;
+        padding-right: 30px;
+      }
+
+
+      #header {
+        background-image: url("images/rails.png");
+        background-repeat: no-repeat;
+        background-position: top left;
+        height: 64px;
+      }
+      #header h1, #header h2 {margin: 0}
+      #header h2 {
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
+      }
+      
+      
+      #about h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      
+      #about-content {
+        background-color: #ffd;
+        border: 1px solid #fc0;
+        margin-left: -11px;
+      }
+      #about-content table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        border-collapse: collapse;
+      }
+      #about-content td {
+        padding: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      #about-content td.name  {color: #555}
+      #about-content td.value {color: #000}
+      
+      #about-content.failure {
+        background-color: #fcc;
+        border: 1px solid #f00;
+      }
+      #about-content.failure p {
+        margin: 0;
+        padding: 10px;
+      }
+      
+      
+      #getting-started {
+        border-top: 1px solid #ccc;
+        margin-top: 25px;
+        padding-top: 15px;
+      }
+      #getting-started h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      #getting-started h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        margin-bottom: 25px;
+      }
+      #getting-started ol {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #getting-started li {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 25px;
+      }
+      #getting-started li h2 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 18px;
+        color: #333;
+      }
+      #getting-started li p {
+        color: #555;
+        font-size: 13px;
+      }
+      
+      
+      #search {
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 11px;
+      }
+      #search input {
+        font-size: 11px;
+        margin: 2px;
+      }
+      #search-text {width: 170px}
+      
+      
+      #sidebar ul {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #sidebar ul h3 {
+        margin-top: 25px;
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      #sidebar li {
+        list-style-type: none;
+      }
+      #sidebar ul.links li {
+        margin-bottom: 5px;
+      }
+      
+    </style>
+    <script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+	<script src="/javascripts/jquery.js" type="text/javascript"></script>
+	<script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
+	<script src="/javascripts/jrails.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	     $(document).ready(function(){
+			$(".m1s").hide();
+			$(".m2s").hide();
+			$(".m3s").hide();
+		    $("button").click(function () {
+			var meilenstein = $(this).attr("class");
+		      $("."+meilenstein+"s").slideToggle("slow");
+		    });
+		  });
+	</script>
+    <script type="text/javascript">
+      function about() {
+        if (Element.empty('about-content')) {
+          new Ajax.Updater('about-content', 'rails/info/properties', {
+            method:     'get',
+            onFailure:  function() {Element.classNames('about-content').add('failure')},
+            onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
+          });
+        } else {
+          new Effect[Element.visible('about-content') ? 
+            'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
+        }
+      }
+      
+      window.onload = function() {
+        $('search-text').value = '';
+        $('search').onsubmit = function() {
+          $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <form id="search" action="http://www.google.com/search" method="get">
+              <input type="hidden" name="hl" value="en" />
+              <input type="text" id="search-text" name="q" value="site:rubyonrails.org " />
+              <input type="submit" value="Search" /> the Rails site
+            </form>
+          </li>
+        
+          <li>
+            <h3>Join the community</h3>
+            <ul class="links">
+              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
+              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
+              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
+            </ul>
+          </li>
+          
+          <li>
+            <h3>Browse the documentation</h3>
+            <ul class="links">
+              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
+              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
+              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
+              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>Welcome aboard</h1>
+          <h2>You&rsquo;re riding Ruby on Rails!</h2>
+        </div>
+
+        <div id="about">
+          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <div id="about-content" style="display: none"></div>
+        </div>
+        
+        <div id="getting-started">
+          <h1>Getting started</h1>
+          <h2>Übersicht der Funktionen</h2>
+          
+          <ul>
+			<li>Datensätze anzeigen
+				<ul>
+					<li><a href="pupils">Pupils</a></li>
+					<li><a href="teachers">Teachers</a></li>
+					<li><a href="courses">Courses</a></li>
+					<li><a href="courselists">Courselists</a></li>
+					<li><a href="rooms">Rooms</a></li>
+					<li><a href="subjects">Subjects</a></li>		
+				</ul>
+			</li>
+			<li><a href="timetables">Timetable</a></li>
+			<li><a href="presencelists">Presencelists</a></li>
+			<li><a href="schedules">Scheduler</a></li>
+		</ul>	
+		<h3>Beschreibung:</h3>
+			<button class="m1">Meilenstein 1 (show/hide)</button><br/><br/>
+			<button class="m2">Meilenstein 2 (show/hide)</button><br/><br/>
+			<button class="m3">Meilenstein 3 (show/hide)</button><br/><br/>
+			<button class="m4">Meilenstein 4 (show/hide)</button>
+			<p class="m1s">
+			Die Struktur für die Tabellen bzw. Klassen wurden mit dem scaffold Generator erstellt, danach habe ich die Assoziationen zwischen den Tabellen nachgetragen und mit den Migrations-Befehlen aktualisiert.<br/>
+			Für die Tabellen habe ich Fixtures erstellt (für pupils und courselists chabe ich ein extra Fixtures-Generator geschrieben) und damit die Datenbank mit Daten befüllt.<br/>
+			Auf der Startseite von courselists habe ich ein simplen Join-Befehl benutzt um die Fremschlüssel-ID's in lesbare Namen umzuwandeln.<br/>
+			Danach habe ich den Controller und die View für den Stundenplan (timetables) entworfen.
+			<br/><br/>
+			<b>Scaffolding:</b> automatische "Gerüsterstellung" für ein Struktur. Man kann alle MVC-Ansichten für die CRUD (Create, Read, Update, Delete) Funktionen damit generieren lassen.<br/><br/>
+			<b>Fixtures:</b> in einer Datei abgespeicherte Datensätze die per Befehl (rake db:fixtures:load) für alle Tabellen geladen werden können</p>
+			<h1 class="m1s">Los geht's</h1>
+			<p class="m1s"><b>Einige Hinweise:</b><br/>
+				Der Link oben auf der Seite "About your application’s environment" sollte funktionieren, wenn nicht, ist die Datenbank nicht richtig eingstellt. Es wird eine sqlite3 Datenbank verwendet, ggf. muss diese mit gem install sqlite3 nachinstalliert werden<br/><br/>
+				<b>Datenbank - Befehle</b><br/>
+					Befehle für die Konsole (man muss sich Arbeitsverzeichnis des Ruby-Projektes befinden)<br/>
+					Datenbank neu anlegen: <u>rake db:create</u><br/>
+					Datenbank reset: <u>rake db:reset</u><br/>
+					Migration ausführen: <u>rake db:migrate</u><br/>
+					Fixtures (Datensätze) laden: <u>rake db:fixtures:load</u><br/><br/>
+					Die Fixtures können auch erweitert werden und das Ergebnis kann man sich dann gleich anzeigen lassen, z.B.<br/>
+					Im Ordner test/fixtures/courses.yml kann man weitere Datensätze anlegen mit <u>rake db:fixtures:load</u> aktualisieren
+					Danach wird der Datensatz auch im Stundenplan (timetables) auftauchen
+				</p>
+				<p class="m2s">
+					Die URL mit dem presencelists als Verzeichnis ist nun aufrufbar. Der gesamte presencelists - Controller ist geschützt. Falls man noch nicht eingeloggt ist, wird man automatisch zur Login-Seite weitergeleitet.<br/>
+					<b>Zugangsdaten: </b>test / test<br/><br/>
+					Es gibt für jeden Lehrer ein Login-Account. Damit kann der Lehrer die geschützte Seite aufrufen, es tauchen alle Kurse von ihm auf und er kann auswählen für welchen Kurs und für welchen Zeitraum die Anwesenheitsliste generiert wird.<br/>
+					Anschließend wird er auf die Seite weitergeleitet, wo das dynamische Formular dann erzeugt wird.<br/><br/>
+					Der Login-Controller habe ich als Plugin zu meinem Projekt erweitert (restful_authentication)<br/><br/>
+					Momentan sind sind die neuen Funktionen noch nicht 100% dynamisch<br/>
+					Die Login-User und die Lehrer (Users und Teachers) müssen noch gekoppelt werden. Momentan kann man sich nur als User <u>test</u> anmelden und man wird anschließend immer als Lehrer mit der ID 6 im presencelists-Controller erkannt.<br/>
+					Die Übergabe der Formular-Daten auf der presencelists Seite werden noch nicht an die nächste Seite weitergegeben.
+					
+				</p>
+				<p class="m3s">
+				Beim Raum-Scheduler kann man einen Raum an einem Tag für einen bestimmten Zeitraum "sperren". Alle Kurse die in diesem Zeitraum eigentlich stattfinden werden umgelegt. Zuerst wird nach einem passenden freien Raum gesucht. Falls kein passender Raum gefunden wird, wird versucht die anderen Kurse umzulegen, sodass ein passender Raum frei wird. (der 2. Fall ist noch nicht implementiert).
+				</p>
+				<p class="m4s">
+				Der <b>schedules</b> Controller kann nun Kurse in andere Räume umlegen. Im einfachen Fall gibt es einen ausreichend großen Raum, in den der Kurs umgelegt wird. Falls nur Räume frei sind die zu klein sind, werden alle Kurse (Raum)ressourcen-optimal umgelegt.<br/><br/>
+				Das ganze lässt sich über die Konsole ausgeben. Dazu muss der Server gestartet werden und dann im Rail-Verzeichnis der Befehl <u>ruby script/console</u> ausgeführt werden.<br/>
+				Nun kann man einen Seiteaufruf (wie mit dem Browser) mit dem Befehl <u>app.get 'schedules/check'</u> starten. Die Ausgabe taucht nur auf der Konsole auf, nicht im Browser! (noch nicht)
+				</p>
+        </div>
+      </div>
+      
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>

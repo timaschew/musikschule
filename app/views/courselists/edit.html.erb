@@ -1,0 +1,28 @@
+<h1>Editing courselist</h1>
+
+<% form_for(@courselist) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :register %><br />
+    <%= f.date_select :register %>
+  </p>
+  <p>
+    <%= f.label :quit %><br />
+    <%= f.date_select :quit %>
+  </p>
+  <p>
+    <%= f.label :canceled %><br />
+    <%= f.check_box :canceled %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @courselist %> |
+<%= link_to 'Back', courselists_path %>

@@ -1,0 +1,16 @@
+<h1>Listing rooms</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @rooms.each do |room| %>
+  <tr>
+    <td><%= h room.name %></td>
+	<td><%= link_to "Timetable", :controller => "timetables",
+	                      :action => "show",
+	                      :params => { :id => room} %> (<%= h room.courses.count %> entries)</td>
+  </tr>
+<% end %>
+</table>

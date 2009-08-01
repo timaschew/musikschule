@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+f1:
+  id: 1
+  name: Klavier
+
+f2:
+  id: 2
+  name: Keyboard
+
+f3:
+  id: 3
+  name: Gitarre
+
+f4:
+  id: 4
+  name: E-Gitarre
+
+f5:
+  id: 5
+  name: Bass-Gitarre
+
+f6:
+  id: 6
+  name: Schlagzeug
+
+f7:
+  id: 7
+  name: Geige
+
+f8:
+  id: 8
+  name: Gesang
+
+f9:
+  id: 9
+  name: Kunst

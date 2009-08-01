@@ -1,0 +1,26 @@
+quentin:
+  id: 1
+  login: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+
+
+
+aaron:
+  id: 2
+  login: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+
+1:
+  login: test
+  firstname: Max
+  lastname: Mustermann
+  email: test@test.de
+  salt: d82d3a6c397bac1fb3d7d93ca4af236e48694fb7
+  crypted_password: 1ee9f8ed613629415b996f21918d3c9c407c9d00
+  created_at: "2009-06-08 11:04:13"

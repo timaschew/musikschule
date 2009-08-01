@@ -1,0 +1,36 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+r1:
+  id: 1
+  name: "eins"
+  size: 5
+
+r2:
+  id: 2
+  name: "zwei"
+  size: 10
+
+r3:
+  id: 3
+  name: "drei"
+  size: 15
+
+r4:
+  id: 4
+  name: "vier"
+  size: 20
+
+r5:
+  id: 5
+  name: "fünf"
+  size: 25
+
+r6:
+  id: 6
+  name: "sechs"
+  size: 30
+  
+# r7:
+#   id: 7
+#   name: "sieben"
+#   size: 50

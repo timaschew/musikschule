@@ -1,0 +1,23 @@
+<p>
+  <b>Register:</b>
+  <%=h @courselist.register %>
+</p>
+
+<p>
+  <b>Quit:</b>
+  <%=h @courselist.quit %>
+</p>
+
+<p>
+  <b>Canceled:</b>
+  <%=h @courselist.canceled %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @courselist.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_courselist_path(@courselist) %> |
+<%= link_to 'Back', courselists_path %>

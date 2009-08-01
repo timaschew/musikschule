@@ -1,0 +1,97 @@
+	<script type="text/javascript" charset="utf-8">
+			$(function()
+            {
+				$('.date-pick').datePicker()
+				$('#start-date').bind(
+					'dpClosed',
+					function(e, selectedDates)
+					{
+						var d = selectedDates[0];
+						if (d) {
+							d = new Date(d);
+							$('#end-date').dpSetStartDate(d.addDays(1).asString());
+						}
+					}
+				);
+				$('#end-date').bind(
+					'dpClosed',
+					function(e, selectedDates)
+					{
+						var d = selectedDates[0];
+						if (d) {
+							d = new Date(d);
+							$('#start-date').dpSetEndDate(d.addDays(-1).asString());
+						}
+					}
+				);
+            });
+		</script>
+
+<h1>Listing presencelists</h1>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Comment</th>
+  </tr>
+
+<% @presencelists.each do |presencelist| %>
+  <tr>
+    <td><%=h presencelist.date %></td>
+    <td><%=h presencelist.status %></td>
+    <td><%=h presencelist.comment %></td>
+    <td><%= link_to 'Show', presencelist %></td>
+    <td><%= link_to 'Edit', edit_presencelist_path(presencelist) %></td>
+    <td><%= link_to 'Destroy', presencelist, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+
+<hr/>
+
+<p>Herzlich Willkommen, Sie sind eingeloggt als <%= @firstname + " " + @lastname %></p>
+<p>Sie haben zur Zeit <%= @courses.count %> Kurse</p>
+
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Kurs-Nr.</th>
+		<th>Name</th>
+		<th>Wochentag</th>
+		<th>Uhrzeit</th>
+		<th>Anfang</th>
+		<th>Ende</th>
+		<th>Liste generieren</th>
+	</tr>
+<% displayDate = true %>
+<% if @courses.count > 0 %>
+	<% @courses.each do |@course| %>
+		<% day = case @course.weekday
+			when 1	then	"Montag"
+			when 2	then	"Dienstag"
+			when 3	then	"Mittwoch"
+			when 4 	then	"Donnerstag"
+			when 5 	then	"Freitag"
+		end %>
+		<tr>
+			<form <%= "id=\"chooseDateForm" + @course.id.to_s + "\"" %> action="presencelists/generate">
+			<td><input type="text" name="list[course]" id="liste_course" disabled="disabled" <%= "value=\"" + @course.id.to_s + "\" />" %></td>
+			<td><%= @course.name %></td>
+			<td><%= day %></td>
+			<td><%= @course.start.strftime("%H:%M") %></td>
+			<% if displayDate == true %>
+				<% displayDate = false %>
+				<td rowspan=<%= "\"" + @courses.count.to_s + "\"" %>><input <%= "id=\"start-date\"" %> class="date-pick" /></td>
+				<td rowspan=<%= "\"" + @courses.count.to_s + "\"" %>><input <%= "id=\"end-date\"" %> class="date-pick" /></td>
+			<% end %>
+			<td><input <%= "id=\"presencelist" + @course.id.to_s + "\"" %> name="commit" type="submit" value="erstellen" /></td>
+			</form>
+		</tr>
+	<% end %>
+<% end %>
+</table>
+
+</div>

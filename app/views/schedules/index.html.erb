@@ -1,0 +1,28 @@
+<h1>Scheduler</h1>
+
+<% form_tag :action => "check" do %>
+
+<p>
+<%= label :room_id, "Raum" %>
+<%= select_tag(:room_id, options_from_collection_for_select(@rooms, :id, :name)) %>
+</p>
+<p>
+<%= label :date, "Datum:" %>
+<%= text_field_tag :date, "31/12/2000", :class => "date_pick" %>
+</p>
+<div style="clear: both;"></div>
+<p>
+<%= label :time_start, "Begin:" %>
+<%= time_select "time", "start", {:minute_step => 15} %>
+<p>
+<p>
+<%= label :time_end, "Ende:" %>
+<%= time_select "time", "end", {:minute_step => 15} %>
+<p>
+
+<p>
+<%= submit_tag "choose" %>
+</p>
+<% end %>
+
+

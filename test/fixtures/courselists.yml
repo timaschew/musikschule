@@ -1,0 +1,803 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+
+#Schlagzeug 2
+126:
+  course_id: 7
+  pupil_id: 44
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+###################
+
+# Schlagzeug 1
+116:
+  course_id: 6
+  pupil_id: 37
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+######################
+
+# Klavier 2
+106:
+  course_id: 5
+  pupil_id: 61
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+###################
+
+# Klavier 1
+96:
+  course_id: 4
+  pupil_id: 22
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+97:
+  course_id: 4
+  pupil_id: 97
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+######################
+
+# Gitarre 3
+86:
+  course_id: 3
+  pupil_id: 89
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+87:
+  course_id: 3
+  pupil_id: 44
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+88:
+  course_id: 3
+  pupil_id: 28
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+89:
+  course_id: 3
+  pupil_id: 46
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+90:
+  course_id: 3
+  pupil_id: 42
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+91:
+  course_id: 3
+  pupil_id: 3
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#92:
+#  course_id: 3
+#  pupil_id: 14
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+#93:
+#  course_id: 3
+#  pupil_id: 71
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+#94:
+#  course_id: 3
+#  pupil_id: 59
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+#95:
+#  course_id: 3
+#  pupil_id: 29
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+####################
+
+# Gitarre 2
+76:
+  course_id: 2
+  pupil_id: 43
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+77:
+  course_id: 2
+  pupil_id: 54
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+78:
+  course_id: 2
+  pupil_id: 85
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+79:
+  course_id: 2
+  pupil_id: 99
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+80:
+  course_id: 2
+  pupil_id: 3
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+81:
+  course_id: 2
+  pupil_id: 44
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+82:
+  course_id: 2
+  pupil_id: 11
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+83:
+  course_id: 2
+  pupil_id: 79
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#84:
+#  course_id: 2
+#  pupil_id: 76
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+#85:
+#  course_id: 2
+#  pupil_id: 38
+#  register: 2009-01-01
+#  quit: 1970-01-01
+#  canceled: false
+
+################
+
+# Gitarre 1
+66:
+  course_id: 1
+  pupil_id: 66
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+67:
+  course_id: 1
+  pupil_id: 67
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+68:
+  course_id: 1
+  pupil_id: 68
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+69:
+  course_id: 1
+  pupil_id: 69
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+70:
+  course_id: 1
+  pupil_id: 70
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+71:
+  course_id: 1
+  pupil_id: 71
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+72:
+  course_id: 1
+  pupil_id: 72
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+73:
+  course_id: 1
+  pupil_id: 73
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+74:
+  course_id: 1
+  pupil_id: 74
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+75:
+  course_id: 1
+  pupil_id: 75
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+  
+################### 
+################### 
+###################
+
+# Gesang 2,4,5,6
+1:
+  course_id: 9
+  pupil_id: 1
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+2:
+  course_id: 9
+  pupil_id: 2
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+3:
+  course_id: 9
+  pupil_id: 3
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+4:
+  course_id: 9
+  pupil_id: 4
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+5:
+  course_id: 9
+  pupil_id: 5
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+6:
+  course_id: 10
+  pupil_id: 6
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+7:
+  course_id: 10
+  pupil_id: 7
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+8:
+  course_id: 10
+  pupil_id: 8
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+9:
+  course_id: 10
+  pupil_id: 9
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+10:
+  course_id: 10
+  pupil_id: 10
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+11:
+  course_id: 10
+  pupil_id: 11
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+12:
+  course_id: 10
+  pupil_id: 12
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+13:
+  course_id: 10
+  pupil_id: 13
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+14:
+  course_id: 10
+  pupil_id: 14
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+15:
+  course_id: 10
+  pupil_id: 15
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+16:
+  course_id: 10
+  pupil_id: 16
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+17:
+  course_id: 10
+  pupil_id: 17
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+18:
+  course_id: 10
+  pupil_id: 18
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+19:
+  course_id: 10
+  pupil_id: 19
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+20:
+  course_id: 10
+  pupil_id: 20
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+21:
+  course_id: 11
+  pupil_id: 21
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+22:
+  course_id: 11
+  pupil_id: 22
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+23:
+  course_id: 11
+  pupil_id: 23
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+24:
+  course_id: 11
+  pupil_id: 24
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+25:
+  course_id: 11
+  pupil_id: 25
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+26:
+  course_id: 11
+  pupil_id: 26
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+27:
+  course_id: 11
+  pupil_id: 27
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+28:
+  course_id: 11
+  pupil_id: 28
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+29:
+  course_id: 11
+  pupil_id: 29
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+30:
+  course_id: 11
+  pupil_id: 30
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+31:
+  course_id: 11
+  pupil_id: 31
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+32:
+  course_id: 11
+  pupil_id: 32
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+33:
+  course_id: 11
+  pupil_id: 33
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+34:
+  course_id: 11
+  pupil_id: 34
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+35:
+  course_id: 11
+  pupil_id: 35
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+36:
+  course_id: 11
+  pupil_id: 36
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+37:
+  course_id: 11
+  pupil_id: 37
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+38:
+  course_id: 11
+  pupil_id: 38
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+39:
+  course_id: 11
+  pupil_id: 39
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+40:
+  course_id: 11
+  pupil_id: 40
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+41:
+  course_id: 12
+  pupil_id: 41
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+42:
+  course_id: 12
+  pupil_id: 42
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+43:
+  course_id: 12
+  pupil_id: 43
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+44:
+  course_id: 12
+  pupil_id: 44
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+45:
+  course_id: 12
+  pupil_id: 45
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+46:
+  course_id: 12
+  pupil_id: 46
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+47:
+  course_id: 12
+  pupil_id: 47
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+48:
+  course_id: 12
+  pupil_id: 48
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+49:
+  course_id: 12
+  pupil_id: 49
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+50:
+  course_id: 12
+  pupil_id: 50
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+51:
+  course_id: 12
+  pupil_id: 51
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+52:
+  course_id: 12
+  pupil_id: 52
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+53:
+  course_id: 12
+  pupil_id: 53
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+54:
+  course_id: 12
+  pupil_id: 54
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+55:
+  course_id: 12
+  pupil_id: 55
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+56:
+  course_id: 12
+  pupil_id: 56
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+57:
+  course_id: 12
+  pupil_id: 57
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+58:
+  course_id: 12
+  pupil_id: 58
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+59:
+  course_id: 12
+  pupil_id: 59
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+60:
+  course_id: 12
+  pupil_id: 60
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+61:
+  course_id: 12
+  pupil_id: 61
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+62:
+  course_id: 12
+  pupil_id: 62
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+63:
+  course_id: 12
+  pupil_id: 63
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+64:
+  course_id: 12
+  pupil_id: 64
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+65:
+  course_id: 12
+  pupil_id: 65
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+  
+####
+
+#a61:
+  course_id: 12
+  pupil_id: 61
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#a62:
+  course_id: 12
+  pupil_id: 62
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#a63:
+  course_id: 12
+  pupil_id: 63
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#a64:
+  course_id: 12
+  pupil_id: 64
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#a65:
+  course_id: 12
+  pupil_id: 65
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+  
+###
+
+#b61:
+  course_id: 12
+  pupil_id: 61
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#b62:
+  course_id: 12
+  pupil_id: 62
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#b63:
+  course_id: 12
+  pupil_id: 63
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#b64:
+  course_id: 12
+  pupil_id: 64
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+
+#b65:
+  course_id: 12
+  pupil_id: 65
+  register: 2009-01-01
+  quit: 1970-01-01
+  canceled: false
+  
+
+

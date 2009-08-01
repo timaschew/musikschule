@@ -1,0 +1,28 @@
+<p>
+  <b>Firstname:</b>
+  <%=h @teacher.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @teacher.lastname %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @teacher.phone %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%=h @teacher.birthday %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @teacher.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>

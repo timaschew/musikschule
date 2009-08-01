@@ -1,0 +1,35 @@
+<h1>Listing courselists</h1>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Pupil</th>
+    <th>Register</th>
+    <th>Quit</th>
+    <th>Canceled</th>
+    <th>Comment</th>
+  </tr>
+
+<% @courselists.each do |courselist| %>
+  <tr>
+    <td><%=h Course.find(courselist.course_id).name %></td>
+	<% p = Pupil.find(courselist.pupil_id) %>
+	<td><%= link_to 'Show', p %> - <%=h p.firstname %> <%=h p.lastname%></td>
+    <td><%=h courselist.register.strftime("%d.%m.%Y") %></td>
+	<% if courselist.quit == "1970-01-01" %>
+    	<td><%=h courselist.quit.strftime("%d.%m.%Y") %></td>
+	<% else %>
+		<td> - </td>
+	<% end %>
+    <td><%=h courselist.canceled %></td>
+    <td><%=h courselist.comment %></td>
+    <td><%= link_to 'Show', courselist %></td>
+    <td><%= link_to 'Edit', edit_courselist_path(courselist) %></td>
+    <td><%= link_to 'Destroy', courselist, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New courselist', new_courselist_path %>

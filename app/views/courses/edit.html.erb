@@ -1,0 +1,44 @@
+<h1>Editing course</h1>
+
+<% form_for(@course) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </p>
+  <p>
+    <%= f.label :duration %><br />
+    <%= f.datetime_select :duration %>
+  </p>
+  <p>
+    <%= f.label :weekday %><br />
+    <%= f.text_field :weekday %>
+  </p>
+  <p>
+    <%= f.label :coursetype %><br />
+    <%= f.check_box :coursetype %>
+  </p>
+  <p>
+    <%= f.label :honorartype %><br />
+    <%= f.check_box :honorartype %>
+  </p>
+  <p>
+    <%= f.label :honorar %><br />
+    <%= f.text_field :honorar %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @course %> |
+<%= link_to 'Back', courses_path %>

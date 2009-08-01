@@ -1,0 +1,35 @@
+<h1>Presencelist <%= @startDate + " - " + @endDate %></h1>
+<!--
+@course = 2
+@startDate = "2009-06-08"
+@endDate = "2009-06-08"
+@datePrefix = "2009-06"
+@days = ["08", "15", "22", "29"]
+@foundList = Courselist.find_all_by_course_id(2)
+@pupils = @foundList.map(&:pupil_id)
+-->
+
+<br/><br/>
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Pupil</th>
+		<% @days.each do |day| %>
+			<th><%= @datePrefix + day %></th>
+		<% end %>
+	</tr>
+
+<% @pupils.each do |pID| %>
+	<tr>
+	<td><%= Pupil.find(pID).firstname + " " + Pupil.find(pID).lastname %></td>
+	<% @days.each do |day| %>
+		<td><input type="checkbox" <%= "name=\"status_" + @datePrefix + day + "\">" %></td>
+	<% end %>
+	</tr>
+<% end %>
+
+
+</table>
+</div>
+<br/><br/>
+<button>Save</button>

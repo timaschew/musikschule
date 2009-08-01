@@ -1,0 +1,32 @@
+<h1>Listing pupils</h1>
+
+<table>
+  <tr>
+    <th>Vorname</th>
+    <th>Nachname</th>
+    <th>Phone</th>
+    <th>Birthday</th>
+    <th>Gender</th>
+    <th>Flags</th>
+    <th>Comment</th>
+  </tr>
+
+<% @pupils.each do |pupil| %>
+  <tr>
+    <td><%=h pupil.firstname %></td>
+    <td><%=h pupil.lastname %></td>
+    <td><%=h pupil.phone %></td>
+    <td><%=h pupil.birthday %></td>
+    <td><%=h pupil.gender %></td>
+    <td><%=h pupil.flags %></td>
+    <td><%=h pupil.comment %></td>
+    <td><%= link_to 'Show', pupil %></td>
+    <td><%= link_to 'Edit', edit_pupil_path(pupil) %></td>
+    <td><%= link_to 'Destroy', pupil, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pupil', new_pupil_path %>

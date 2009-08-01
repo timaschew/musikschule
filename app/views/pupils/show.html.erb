@@ -1,0 +1,38 @@
+<p>
+  <b>Firstname:</b>
+  <%=h @pupil.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @pupil.lastname %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @pupil.phone %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%=h @pupil.birthday %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%=h @pupil.gender %>
+</p>
+
+<p>
+  <b>Flags:</b>
+  <%=h @pupil.flags %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @pupil.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_pupil_path(@pupil) %> |
+<%= link_to 'Back', pupils_path %>
