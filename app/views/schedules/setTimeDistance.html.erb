@@ -1,0 +1,36 @@
+<h1>Bitte für jeden Kurs die Zeit-Grenze einstellen</h1>
+
+Kurse:
+<ul>
+<% @scheduleBCourses.each do |cID| %>
+	<% course = Course.find(cID) %>
+	<li><%= "(" + cID.to_s + ") " + course.name + " von " + course.start.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " + Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname%></li>
+<% end %>
+
+</ul>
+
+
+<% form_tag :action => "check" do %>
+
+<%= hidden_field_tag(:schedulesA, @schedulesACourses) %> 
+<%= hidden_field_tag(:schedulesB, @schedulesBCourses) %> 
+
+<% @scheduleBCourses.each do |cID| %>
+	<% timeLimits = [] %>
+	<p>
+	<%= label :courseID, "Kurse ID: " + cID.to_s %>
+	<%= hidden_field_tag(:courseID, cID) %>
+	</p>
+	<p>
+	<%= label :time_start, "Begin:" %>
+	<%= time_select "time", "start", {:minute_step => 15} %>
+	<p>
+	<p>
+	<%= label :time_end, "Ende:" %>
+	<%= time_select "time", "end", {:minute_step => 15} %>
+	<p>
+<% end %>
+<p>
+<%= submit_tag "choose" %>
+</p>
+<% end %>

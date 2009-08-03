@@ -15,16 +15,16 @@
 		<th>Donnerstag</th>
 		<th>Freitag</th>
 	</tr>
-<% time = 14 %>	
-<!-- 14:00 bis 19:00 Uhr => 6 Stunden -->
-<% 6.times do %>
+<% time = 9 %>	
+<!-- 14:00 bis 19:00 Uhr => 11 Stunden -->
+<% 11.times do %>
 	<tr>
 		<td><%= h time %>:00</td>
 		<%# Schleife über 5 Werktage
 		  # Es wird für jede Stunde geprüft ob ein Kurs zum aktuellen Tag und dem aktuellen Raum existiert 
 		  # Wenn zwei oder mehr Kurse für die selbe Zeit eingetragen sind, erscheint eine Fehlermeldung %>
 		<% 5.times do |day| %>
-			<% courseNow = Course.find(:all, :conditions => "start like '%#{time}%' AND weekday = #{day+1} AND room_id = #{room.id}") %>
+			<% courseNow = Course.find(:all, :conditions => "start like '#{time}%' AND weekday = #{day+1} AND room_id = #{room.id}") %>
 			<% if courseNow[0].nil? %>
 				<td class="timeTableCell"> - </td>
 			<% elsif courseNow.count > 1 %>

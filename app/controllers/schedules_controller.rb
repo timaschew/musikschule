@@ -63,6 +63,10 @@ class SchedulesController < ApplicationController
 				end
 			end # Schritt (A)
 			
+			if !@scheduleBCourses.empty?
+			  render :template => "schedules/setTimeDistance"
+		  end
+			
 			@scheduleBCourses.each_with_index do |cID, i|
 			  offset = 3600 # init (Stundenweise), alternativ 1800 oder 900 (halbe Stunde oder viertel Stunde)
 			  limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
@@ -102,7 +106,6 @@ class SchedulesController < ApplicationController
 			      offset += offset
 		      end
 		    end
-			  
 			  
 			  if changed == false
 			    @scheduleCCourses.push(cID)

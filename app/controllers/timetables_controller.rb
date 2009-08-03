@@ -19,8 +19,8 @@ class TimetablesController < ApplicationController
     @courseTimes = {}
     @courseRooms = {}
     
-    time = 14
-    6.times do 
+    time = 9
+    11.times do 
       @allRooms.each do |r|
         tmp = Course.find(:all, :conditions => "start like '%#{time}%' AND weekday = #{@weekdayNo} AND room_id = #{r.id}").map(&:id)[0]
         @courseList[time.to_s + "-" + r.id.to_s] = tmp

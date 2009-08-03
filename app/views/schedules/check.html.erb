@@ -17,8 +17,12 @@
 <h3>nach Schritt A</h3>
 
 <%= render :partial => "roomTimeTable", :locals => 
-{ :roomID => @roomID, :startHour => @startHour, :endHour => @endHour } %> 
+{ :roomID => @roomID, :startHour => @startHour, :endMin => @endMin, :endHour => @endHour } %> 
 
 <%= "B:" + @scheduleBCourses.inspect %>
 <br/>
 <%= "C:" + @scheduleCCourses.inspect %>
+<br/>
+<% if !@scheduleCCourses.nil? && !@scheduleCCourses.empty? %>
+	<p>neue View anzeigen</p>
+<% end %>
