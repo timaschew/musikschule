@@ -103,6 +103,7 @@ class SchedulesController < ApplicationController
 		      end
 		    end
 			  
+			  
 			  if changed == false
 			    @scheduleCCourses.push(cID)
 		    end
