@@ -10,19 +10,20 @@ class TimetablesController < ApplicationController
   def times
     @allRooms = Room.find(:all)
     
-    @weekdayNo = params[:day]
-    @roomID = params[:room]
-    @allScheduledRooms = params[:allScheduledRooms]
-    @allParallelCourses = params[:allParallelCourses]
+    @weekday = params[:day]
+    if @weekday.nil? || @weekday == ""
+      @weekday = 1
+    end
     
     @courseList = {}
     @courseTimes = {}
     @courseRooms = {}
     
-    time = 9
-    11.times do 
+    #Zeitdauer eines Unterrichtstages ist im application_controller definiert
+    time = $TIMETABLESTART
+    $TIMETABLEEND.times do 
       @allRooms.each do |r|
-        tmp = Course.find(:all, :conditions => "start like '%#{time}%' AND weekday = #{@weekdayNo} AND room_id = #{r.id}").map(&:id)[0]
+        tmp = Course.find(:all, :conditions => "start like '%#{time}%' AND weekday = #{@weekday} AND room_id = #{r.id}").map(&:id)[0]
         @courseList[time.to_s + "-" + r.id.to_s] = tmp
         @courseRooms[r.id.to_s] = tmp
       end
@@ -39,20 +40,8 @@ class TimetablesController < ApplicationController
       @isScheduled = 1
     end
     
-    puts "INSPECT:1 #{@allScheduledRooms.inspect}"
-    puts "INSPECT:2 #{@allParallelCourses.inspect}"
     
     
-    
-  end
-  
-  def scheduledTime
-    @weekday = params[:day]
-    @startTimeM = params[:startM]
-    @startTimeH = params[:startH]
-    @endTimeM = params[:endM]
-    @endTimeH = params[:endH]
-    @courses = params[:courses]
     
   end
   
