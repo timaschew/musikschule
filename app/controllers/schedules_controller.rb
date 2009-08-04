@@ -7,12 +7,30 @@ class SchedulesController < ApplicationController
 	def index
 		@rooms = Room.find(:all)
 	end
+	
+	def continueChecking
+	  
+	  @parameter = params
+	  
+	  
+	  $scheduleBCourses.each_with_index do |cID, i| 
+	    tmpHash = {}
+	    tmpHash[:course] = cID
+	    tmpHash[:limitStartHour] = params[:time][""+cID.to_s+"_start(4i)"] # Anfangszeitpunkt der Belegung (Stunde)
+  		tmpHash[:limitStartMin] = params[:time][""+cID.to_s+"_start(5i)"]  # Anfangszeitpunkt der Belegung (Minute)
+  		tmpHash[:limitEndHour] = params[:time][""+cID.to_s+"_end(4i)"]     # Endzeitpunkt der Belegung (Stunde)
+  		tmpHash[:limitEndMin] = params[:time][""+cID.to_s+"_end(5i)"]      # Endzeitpunkt der Belegung (Minute)
+	    $scheduleBCourses[i] = tmpHash
+	  end
+	  
+  end
+  
 
 	def check
 	  #ActiveRecord::Base.logger = Log4r::Logger.new("Application Log") 
 	  #ActiveRecord::Base.logger.level = 0 # at any time 
 	  
-	  ActiveRecord::Base.logger = Logger.new("Application Log") 
+	  ActiveRecord::Base.logger = Logger.new("log/schedules_controller.log") 
     ActiveRecord::Base.logger.level = 0 # warn 
     
 	  
@@ -42,7 +60,7 @@ class SchedulesController < ApplicationController
 			@originalTimeTable = @container.dup
 			
 			@smallFreeRooms = []    # Kurse die im Schritt (A) verschoben werden (gleiche Zeit, anderer Raum)
-			@scheduleBCourses = []  # Kurse die im Schritt (B) verschoben werden (gleicher Raum, andere Zeit)
+			$scheduleBCourses = []  # Kurse die im Schritt (B) verschoben werden (gleicher Raum, andere Zeit)
 			@scheduleCCourses = []  # Kurse die im Schritt (C) verschoben werden (anderer Raum, andere Zeit)
 			
 			# Pruefe welche Kurse fuer in dem Zeitraum und Raum liegen und gebe Kurs-IDs als Array zurück
@@ -52,22 +70,22 @@ class SchedulesController < ApplicationController
 			# Fuer jeden Kurs der verschoben werden muss, suche einen freien Raum, zur gleichen Zeit
 			@scheduleCourses.each_with_index do |cID, i|
 			  course = Course.find(cID) # komplettes Objekt mit allen Feldern
-				size = Courselist.find_all_by_course_id(cID).count   # Größe des Kurses bestimmen
+				#size = Courselist.find_all_by_course_id(cID).count   # Größe des Kurses bestimmen
+				size = 10
 				newRoom = checkFreeRoomAtSameTime(@weekdayNo, size, course.id, course.start, course.duration, @roomID)
 				if !newRoom.nil? && newRoom != false
 					changeRoom(course.id, newRoom)
-					#@scheduleCourses.delete_at(i)
 				else
-				  @scheduleBCourses.push(cID)
+				  $scheduleBCourses.push(cID)
 					# Raum bleibt in @scheduleCourses und es wirt Schritt 3b angewandt
 				end
 			end # Schritt (A)
 			
-			if !@scheduleBCourses.empty?
+			if !$scheduleBCourses.empty?
 			  render :template => "schedules/setTimeDistance"
 		  end
 			
-			@scheduleBCourses.each_with_index do |cID, i|
+			$scheduleBCourses.each_with_index do |cID, i|
 			  offset = 3600 # init (Stundenweise), alternativ 1800 oder 900 (halbe Stunde oder viertel Stunde)
 			  limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
 			  range = limit * (3600/offset)

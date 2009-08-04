@@ -1,33 +1,37 @@
-<h1>Bitte für jeden Kurs die Zeit-Grenze einstellen</h1>
-
+<h1>Zeit-Grenze einstellen</h1>
+<h2>Für die folgenden Kurse konnte kein Ersatzraum zur gleichen Zeit gefunden werden</h2>
+<h3>Bitte wählen sie einen neuen maximalen Zeitraum für den jeweiligen Kurs aus</h3>
 Kurse:
 <ul>
-<% @scheduleBCourses.each do |cID| %>
+<% $scheduleBCourses.each do |cID| %>
 	<% course = Course.find(cID) %>
-	<li><%= "(" + cID.to_s + ") " + course.name + " von " + course.start.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " + Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname%></li>
+	<li><%= "(" + cID.to_s + ") " + course.name + " von " + course.start.strftime("%H") + ":" + course.start.strftime("%M") + " bis " + course.duration.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " + Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname%></li>
 <% end %>
 
 </ul>
 
 
-<% form_tag :action => "check" do %>
+<% form_tag :action => "continueChecking" do %>
 
-<%= hidden_field_tag(:schedulesA, @schedulesACourses) %> 
-<%= hidden_field_tag(:schedulesB, @schedulesBCourses) %> 
+<%# hidden_field_tag(:schedulesA, @scheduleACourses) %> 
 
-<% @scheduleBCourses.each do |cID| %>
+<% $scheduleBCourses.each do |course| %>
+	<%= hidden_field_tag("schedulesB[]", course.to_i) %> 
+<% end %>
+
+<% $scheduleBCourses.each do |cID| %>
 	<% timeLimits = [] %>
 	<p>
-	<%= label :courseID, "Kurse ID: " + cID.to_s %>
-	<%= hidden_field_tag(:courseID, cID) %>
+	<%= label :courseID, "ID: " + cID.to_s %>
+	<%= hidden_field_tag("courseID[]", cID) %>
 	</p>
 	<p>
 	<%= label :time_start, "Begin:" %>
-	<%= time_select "time", "start", {:minute_step => 15} %>
+	<%= time_select "time", cID.to_s+"_start", {:minute_step => 15} %>
 	<p>
 	<p>
 	<%= label :time_end, "Ende:" %>
-	<%= time_select "time", "end", {:minute_step => 15} %>
+	<%= time_select "time", cID.to_s+"_end", {:minute_step => 15} %>
 	<p>
 <% end %>
 <p>
