@@ -79,7 +79,8 @@
 #  duration: "15:00"
 #  subject_id: 8
 #  teacher_id: 8
-  
+ 
+ 
 9:
   id: 9
   name: "Gesang R2"
@@ -119,4 +120,57 @@
   duration: "15:00"
   subject_id: 8
   teacher_id: 8
+  
+# 13 Uhr Reihe
+
+13:
+  id: 13
+  name: "Gitarre 0"
+  room_id: 3  
+  weekday: 1
+  start: "13:00"
+  duration: "14:00"
+  subject_id: 8
+  teacher_id: 8
+14:
+  id: 14
+  name: "Gesang Rb2"
+  room_id: 2
+  weekday: 1
+  start: "13:00"
+  duration: "14:00"
+  subject_id: 8
+  teacher_id: 8
+  
+15:
+  id: 15
+  name: "Gesang Rb4"
+  room_id: 4
+  weekday: 1
+  start: "13:00"
+  duration: "14:00"
+  subject_id: 8
+  teacher_id: 8
+  
+16:
+  id: 16
+  name: "Gesang Rb5"
+  room_id: 5
+  weekday: 1
+  start: "13:00"
+  duration: "14:00"
+  subject_id: 8
+  teacher_id: 8
+  
+17:
+  id: 17
+  name: "Gesang Rb6"
+  room_id: 6
+  weekday: 1
+  start: "13:00"
+  duration: "14:00"
+  subject_id: 8
+  teacher_id: 8
+  
+
   
