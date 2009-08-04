@@ -5,19 +5,19 @@ Kurse:
 <ul>
 <% $scheduleBCourses.each do |cID| %>
 	<% course = Course.find(cID) %>
-	<li><%= "(" + cID.to_s + ") " + course.name + " von " + course.start.strftime("%H") + ":" + course.start.strftime("%M") + " bis " + course.duration.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " + Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname%></li>
+	<!-- Bsp.-Ausgabe: (1) Gitarrenunterricht von 12:00 bis 13:00 bei Johannes Schmidt -->
+	<li><%= "(" + cID.to_s + ") " +
+				course.name + " von " +
+				course.start.strftime("%H") + ":" + course.start.strftime("%M") + " bis " +
+				course.duration.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " +
+				Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname %>
+	</li>
 <% end %>
 
 </ul>
 
 
 <% form_tag :action => "continueChecking" do %>
-
-<%# hidden_field_tag(:schedulesA, @scheduleACourses) %> 
-
-<% $scheduleBCourses.each do |course| %>
-	<%= hidden_field_tag("schedulesB[]", course.to_i) %> 
-<% end %>
 
 <% $scheduleBCourses.each do |cID| %>
 	<% timeLimits = [] %>

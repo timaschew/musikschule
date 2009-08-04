@@ -1,12 +1,15 @@
 <h1>Scheduler</h1>
 
-<h2><%= "Raum ID: " + @roomID.to_s + " am Tag: " + @weekday + " von " + @startHour.to_s + ":" + @startMin.to_s + " bis " + @endHour.to_s + ":" + @endMin.to_s %></h2>
+<h2><%= "Raum ID: " + $busyRoomID.to_s + 
+		" am Tag: " + $weekdayString + 
+		" von " + $busyStartH.to_s + ":" + $busyStartM.to_s + 
+		" bis " + $busyEndH.to_s + ":" + $busyEndM.to_s %></h2>
 
 <br/>
-<% if !@scheduleCourses.nil? %>
-	<%= "gefunden Kurse: " + @scheduleCourses.count.to_s %>
+<% if !$scheduleCourses.nil? %>
+	<%= "gefunden Kurse: " + $scheduleCourses.count.to_s %>
 	<br/><br/>
-	<% @scheduleCourses.each do |cID| %>
+	<% $scheduleCourses.each do |cID| %>
 		<% c = Course.find(cID) %>
 		<%= "<b>" + c.name + "</b> von " + c.start.strftime("%H:%M") + " bis " + c.duration.strftime("%H:%M") %><br/>
 	<% end %>
@@ -16,13 +19,9 @@
 
 <h3>nach Schritt A</h3>
 
-<%= render :partial => "roomTimeTable", :locals => 
-{ :roomID => @roomID, :startHour => @startHour, :endMin => @endMin, :endHour => @endHour } %> 
+<%= render :partial => "roomTimeTable" %> 
 
 <%= "B:" + $scheduleBCourses.inspect %>
 <br/>
-<%= "C:" + @scheduleCCourses.inspect %>
+<%= "C:" + $scheduleCCourses.inspect %>
 <br/>
-<% if !@scheduleCCourses.nil? && !@scheduleCCourses.empty? %>
-	<p>neue View anzeigen</p>
-<% end %>

@@ -15,9 +15,8 @@
 		<th>Donnerstag</th>
 		<th>Freitag</th>
 	</tr>
-<% time = 9 %>	
-<!-- 14:00 bis 19:00 Uhr => 11 Stunden -->
-<% 11.times do %>
+<% time = $TIMETABLESTART %>	
+<% $TIMETABLEEND.times do %>
 	<tr>
 		<td><%= h time %>:00</td>
 		<%# Schleife über 5 Werktage

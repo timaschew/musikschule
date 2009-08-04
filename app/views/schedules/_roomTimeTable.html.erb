@@ -6,18 +6,15 @@
 			<th><%= r.name %></th>
 		<% end %>
 	</tr>
-	<% time = 9 %>	
-	<% endTime = 20 %>
-	<!-- 9:00 bis 20:00 Uhr => 11 Stunden -->
-	<% (endTime-time).times do %>
-		
+	<% time = $TIMETABLESTART %>	
+	<% $TIMETABLEEND.times do %>
 		<tr>
 		<td><%= h time %>:00</td>
 		<% Room.find(:all).map(&:id).each do |r| %>
 			<% tmp = getForStartTimeAndRoom(time, 0, r) %>
-			<% if r == roomID && 
-				(time.to_i >= startHour.to_i) &&
-				(time.to_i < endHour.to_i || (time.to_i == endHour.to_i && endMin.to_i > 0)) %>
+			<% if r == $busyRoomID && 
+				(time.to_i >= $busyStartH.to_i) &&
+				(time.to_i < $busyEndH.to_i || (time.to_i == $busyEndH.to_i && $busyEndM.to_i > 0)) %>
 				<% style = "style=\"background: red;\"" %>
 			<% elsif !tmp.nil? && tmp.key?(:changed) %>
 				<% style = "style=\"background: green;\"" %>
