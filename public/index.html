@@ -277,13 +277,13 @@
 			</li>
 			<li><a href="timetables">Timetable</a></li>
 			<li><a href="presencelists">Presencelists</a></li>
-			<li><a href="schedules">Scheduler</a></li>
+			<li><a href="schedules"><b>Scheduler</b></a></li>
 		</ul>	
 		<h3>Beschreibung:</h3>
 			<button class="m1">Meilenstein 1 (show/hide)</button><br/><br/>
 			<button class="m2">Meilenstein 2 (show/hide)</button><br/><br/>
 			<button class="m3">Meilenstein 3 (show/hide)</button><br/><br/>
-			<button class="m4">Meilenstein 4 (show/hide)</button>
+			<button class="m4">Meilenstein 4+ (show/hide)</button>
 			<p class="m1s">
 			Die Struktur für die Tabellen bzw. Klassen wurden mit dem scaffold Generator erstellt, danach habe ich die Assoziationen zwischen den Tabellen nachgetragen und mit den Migrations-Befehlen aktualisiert.<br/>
 			Für die Tabellen habe ich Fixtures erstellt (für pupils und courselists chabe ich ein extra Fixtures-Generator geschrieben) und damit die Datenbank mit Daten befüllt.<br/>
@@ -320,9 +320,13 @@
 				Beim Raum-Scheduler kann man einen Raum an einem Tag für einen bestimmten Zeitraum "sperren". Alle Kurse die in diesem Zeitraum eigentlich stattfinden werden umgelegt. Zuerst wird nach einem passenden freien Raum gesucht. Falls kein passender Raum gefunden wird, wird versucht die anderen Kurse umzulegen, sodass ein passender Raum frei wird. (der 2. Fall ist noch nicht implementiert).
 				</p>
 				<p class="m4s">
-				Der <b>schedules</b> Controller kann nun Kurse in andere Räume umlegen. Im einfachen Fall gibt es einen ausreichend großen Raum, in den der Kurs umgelegt wird. Falls nur Räume frei sind die zu klein sind, werden alle Kurse (Raum)ressourcen-optimal umgelegt.<br/><br/>
-				Das ganze lässt sich über die Konsole ausgeben. Dazu muss der Server gestartet werden und dann im Rail-Verzeichnis der Befehl <u>ruby script/console</u> ausgeführt werden.<br/>
-				Nun kann man einen Seiteaufruf (wie mit dem Browser) mit dem Befehl <u>app.get 'schedules/check'</u> starten. Die Ausgabe taucht nur auf der Konsole auf, nicht im Browser! (noch nicht)
+				Der <b><a href="schedules">schedules</a></b> Controller kann nun Kurse in andere Räume umlegen.<br/><br/>
+				<u>Variante 1:</u> Der Kurs findet zur gleichen Zeit in einem anderen Raum statt (funktioniert).<br/><br/>
+				<u>Variante 2:</u> Der Kurs findet im gleichen Raum zur anderen Zeit statt (in Bearbeitung):<br/>
+				- Falls ein Kurs dabei ist, dessen Zeit geändert werden muss, wird der Benutzer aufgeforder für die jeweiligen Kurse (es können mehrere sein) ein Zeit-Limit einzustellen. (funktioniert)<br/>
+				- Innerhalb dieses Zeitlimits werden freie Zeiträume gesucht (in Bearbeitung)<br/><br/>
+				<u>Variante 3:</u> Kurs findet im anderen Raum und zur anderen Zeit statt (noch nicht implementiert, ist aber eigentlich nur eine Abwandlung von Variante 2 (mit verschiedenen Räumen das ganze)<br/><br/>
+				<u>Variante 4:</u> Kurs werden versucht rekursiv umgelegt zu werden (noch nicht implementiert).
 				</p>
         </div>
       </div>

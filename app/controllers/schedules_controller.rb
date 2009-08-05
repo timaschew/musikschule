@@ -1,34 +1,18 @@
 class SchedulesController < ApplicationController
 
-  $smallFreeRooms = nil         # freie Räume, die aber zu klein sind in Schritt (A)
-  $timeTableList = nil          # alle Kurse mit Informationen als Hash
+  ActiveRecord::Base.logger = Logger.new("log/schedules_controller.log") 
+  ActiveRecord::Base.logger.level = 0 # warn
+  
   
 	def index
 		@rooms = Room.find(:all)
 	end
 	
-	def continueChecking
-	  
-	  @parameter = params
-	  
-	  
-	  $scheduleBCourses.each_with_index do |cID, i| 
-	    tmpHash = {}
-	    tmpHash[:course] = cID
-	    tmpHash[:limitStartHour] = params[:time][""+cID.to_s+"_start(4i)"] # Anfangszeitpunkt der Belegung (Stunde)
-  		tmpHash[:limitStartMin] = params[:time][""+cID.to_s+"_start(5i)"]  # Anfangszeitpunkt der Belegung (Minute)
-  		tmpHash[:limitEndHour] = params[:time][""+cID.to_s+"_end(4i)"]     # Endzeitpunkt der Belegung (Stunde)
-  		tmpHash[:limitEndMin] = params[:time][""+cID.to_s+"_end(5i)"]      # Endzeitpunkt der Belegung (Minute)
-	    $scheduleBCourses[i] = tmpHash
-	  end
-	  
-  end
-  
 
 	def check
 	  
-	  ActiveRecord::Base.logger = Logger.new("log/schedules_controller.log") 
-    ActiveRecord::Base.logger.level = 0 # warn 
+	  $smallFreeRooms = nil         # freie Räume, die aber zu klein sind in Schritt (A)
+    $timeTableList = nil          # alle Kurse mit Informationen als Hash
 	  
 	  submitForm = params[:commit]
 		
@@ -83,61 +67,55 @@ class SchedulesController < ApplicationController
 			  render :template => "schedules/setTimeDistance"
 		  end
 			
-			$scheduleBCourses.each_with_index do |cID, i|
-			  offset = 3600 # init (Stundenweise), alternativ 1800 oder 900 (halbe Stunde oder viertel Stunde)
-			  limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
-			  range = limit * (3600/offset)
-        changed = false
-			  
-			  course = Course.find(cID) # komplettes Objekt mit allen Feldern
-			  size = Courselist.find_all_by_course_id(cID).count   # Größe des Kurses bestimmen
-			  logger.debug "andere Zeit im selben Raum für Kurs #{course.id} (#{course.name})"
-			  
-			  time = getForCourse(course.id)[:startTime].utc
-			  
-			  logger.debug ""
-			  logger.debug "#{$timeTableList.inspect}"
-			  logger.debug ""
-			  
-			  range.times do |i|
-			    newStartTime = time + offset
-			    busyTimeStart = Time.mktime(0, 1, 1, $busyStartH.to_i + 1, $busyStartM.to_i).utc
-			    busyTimeEnd = Time.mktime(0, 1 , 1, $busyEndH.to_i + 1, $busyEndM.to_i).utc
-			    # den selben Raum nur prüfen, wenn es außerhalb des besetzten Zeitraums liegt
-			    if !newStartTime.between?(busyTimeStart, busyTimeEnd)
-  			    logger.debug "test #{newStartTime}"
-  			    result = checkRoomAtOtherTime(course.id, newStartTime)
-  			    if !result.nil? && result == 1
-  			      changeTime(course.id, newStartTime)
-  			      changed = true
-  			      break
-  	        end
-  	        logger.debug "um #{newStartTime} passt es: #{result.nil? ? false.to_s : true.to_s}"
-	        end
-	        
-			    if i % 2 == 0
-			      offset *= -1 # alternating
-			    else
-			      offset *= -1 # alternating
-			      offset += offset
-		      end
-		    end
-			  
-			  if changed == false
-			    $scheduleCCourses.push(cID)
-		    end
-			  
-			end
-			
 			
 		end # POST Aktion
 	end # check Methode
 	
-	def show
-	end
+	
+	def continueChecking
+	  @scheduleHashCourses = []
 
-	def create
-	end
+	  $scheduleBCourses.each_with_index do |cID, i| 
+	    tmpHash = {}
+	    tmpHash[:course] = cID
+  		startHour = params[:time][""+cID.to_s+"_start(4i)"].to_i # Anfangszeitpunkt der Belegung (Stunde)
+  		startMin = params[:time][""+cID.to_s+"_start(5i)"].to_i  # Anfangszeitpunkt der Belegung (Minute)
+  		endHour = params[:time][""+cID.to_s+"_end(4i)"].to_i     # Endzeitpunkt der Belegung (Stunde)
+  		endMin = params[:time][""+cID.to_s+"_end(5i)"].to_i      # Endzeitpunkt der Belegung (Minute)
+  		
+  		tmpHash[:limitStart] = Time.mktime(0, 1, 1, startHour+1, startMin).utc
+  		tmpHash[:limitEnd] = Time.mktime(0, 1, 1, endHour+1, endMin).utc
+  		
+	    @scheduleHashCourses[i] = tmpHash
+	  end
+	  logger.debug "scheduleHashCourses: #{$scheduleHashCourses.inspect}"
+	  #logger.debug ""
+    #logger.debug "timeTableList: #{$timeTableList.inspect}"
+	  
+	  @scheduleHashCourses.each do |hashmap|
+	    cID = hashmap[:course]
+	    logger.debug "hashmap: #{hashmap}}"
+	    # als erstes im selben Raum prüfen
+	    courseRoom = Course.find(cID).room_id
+	    logger.debug "getForCourse(#{cID})"
+	    blub = getForCourse(cID)
+      oldStartTime = getForCourse(cID)[:startTime].utc # original Time
+      oldEndTime = getForCourse(cID)[:endTime].utc # original Time
+	    limitUp = oldStartTime - hashmap[:limitStart] # Zeitdifferenz nach oben
+	    limitDown = hashmap[:limitEnd] - oldStartTime # Zeitdifferenz nach unten
+	    offset = 3600 # init (Stundenweise), alternativ 1800 oder 900 (halbe Stunde oder viertel Stunde)
+	    
+	    checkNewTimeAtRange(offset, limitUp, limitDown, cID, courseRoom, oldStartTime, oldEndTime)
+		  
+		  
+		  logger.debug ""
+		  #logger.debug "#{$timeTableList.inspect}"
+		  logger.debug ""
+	    
+    end
+      
+  end
+	
 	
 	private
 	
@@ -232,13 +210,14 @@ class SchedulesController < ApplicationController
   einen Ersatzraum, der frei ist, außer notRoom (dieser ist nämlich gesperrt)
   Wenn ein Raum gefunden gib Raumnumme zurück, sonst -1
 =end
-  	def checkRoomAtOtherTime(courseID, startTime)
+  	def checkRoomAtOtherTime(courseID, room, startTime)
+  	  # TODO: darf hier in der DB gesucht werden????? es müsste eigenltich in $timeTableList gesucht werden !
   	  oldStart = Course.find(courseID).start.utc
   	  oldEnd = Course.find(courseID).duration.utc
   	  duration = oldEnd - oldStart
   	  logger.debug "Kurs #{courseID} NEU: #{startTime} bis #{startTime + duration}"
-  	  room = Course.find(courseID).room_id
-  		freeTime = nil
+  	  #room = Course.find(courseID).room_id
+  		freeTime = 0
       alreadyCourses = checkNewTimeAndRoom(room, startTime, startTime + duration)
 
       if alreadyCourses.empty?
@@ -271,6 +250,71 @@ class SchedulesController < ApplicationController
     #logger.debug "1. Laenge: #{alreadyCourses.count}"
     alreadyCourses
   end
+  
+  
+  # Methode ist in Bearbeitung...
+  def checkNewTimeAtRange(offset, limitUp, limitDown, cID, courseRoom, oldStartTime, oldEndTime)
+    
+	  #limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
+	  #range = limit * (3600/offset)
+	  rangeUp = limitUp.abs / offset
+	  rangeDown = limitDown.abs / offset
+	  range = rangeUp > rangeDown ? rangeUp.to_i : rangeDown.to_i # max. Range
+    changed = false
+	  
+	  course = Course.find(cID) # komplettes Objekt mit allen Feldern
+	  
+	  logger.debug "suche neue Zeit für Kurs #{course.id}: #{course.name}"
+	  logger.debug "rangeUp = #{rangeUp} ; rangeDown = #{rangeDown} ; range = #{range}"
+	  
+    range.times do |i|
+	    
+	    # Wenn Limit nach oben und unten sich unterscheiden
+	    # offset für nächste Iteration anpassen
+	    if rangeUp < range # @ 1,3,5,7, ...
+	      offset *= -1
+	      offset += offset
+	      next # continue
+      end
+      if rangeDown < range # @ 0,2,4,6, ...
+        offset *= -1
+        next # continue
+      end
+	    
+	    newStartTime = oldStartTime + offset
+	    newEndTime = oldEndTime + offset
+	    busyTimeStart = Time.mktime(0, 1, 1, $busyStartH.to_i + 1, $busyStartM.to_i).utc
+	    busyTimeEnd = Time.mktime(0, 1 , 1, $busyEndH.to_i + 1, $busyEndM.to_i).utc
+	    # den selben Raum nur prüfen, wenn es außerhalb des besetzten Zeitraums liegt
+	    if newStartTime.between?(busyTimeStart, busyTimeEnd) || newEndTime.between?(busyTimeStart, busyTimeEnd)
+	      logger.debug "\t Zeit liegt innerhalb der busyTime #{newStartTime.strftime("%H")}:#{newStartTime.strftime("%M")} - #{newEndTime.strftime("%H")}:#{newEndTime.strftime("%M")}"
+      else
+		    logger.debug "Zeit liegt außerhalb #{newStartTime.strftime("%H")}:#{newStartTime.strftime("%M")} - #{newEndTime.strftime("%H")}:#{newEndTime.strftime("%M")}"
+		    result = checkRoomAtOtherTime(cID, courseRoom, newStartTime)
+		    if result == 1
+		      changeTime(cID, newStartTime)
+		      changed = true
+		      break
+        end
+        
+        logger.debug "Zeit ist frei: #{result.nil? ? false.to_s : true.to_s}"
+        
+      end
+      
+      # Offset für nächste Iteratino anpassen
+	    if i % 2 == 0
+	      offset *= -1 # alternating: @ 0,2,4,6, ...
+	    else
+	      offset *= -1 # alternating: @ 1,3,5,7, ...
+	      offset += offset
+      end
+    end
+	  
+	  if changed == false
+	    $scheduleCCourses.push(cID)
+    end
+    
+  end
 
 =begin
   Instanzvariablen werden initialisiert
@@ -299,10 +343,6 @@ class SchedulesController < ApplicationController
     entry[:room] = roomID
     entry[:startTime] = Time.mktime(0, 1, 1, (startHour.to_i + 1), startMin).utc
     entry[:endTime] = Time.mktime(0, 1, 1, (endHour.to_i + 1), endMin).utc
-    #entry[:startHour] = startHour
-    #entry[:startMin] = startMin
-    #entry[:endHour] = endHour
-    #entry[:endMin] = endMin
     $timeTableList.push(entry)
   end
 
@@ -343,7 +383,9 @@ class SchedulesController < ApplicationController
       if cID.to_i == t[:course].to_i
         #@messages.push("Changing Room: Kurs " + cID.to_s + " von " + t[:room].to_s + " nach " + rID.to_s)
         logger.debug "Changing Time: Kurs #{cID.to_s} von #{t[:startTime].to_s} nach #{startTime})"
+        duration = $timeTableList[i][:endTime] - $timeTableList[i][:startTime]
         $timeTableList[i][:startTime] = startTime
+        $timeTableList[i][:endTime] = startTime + duration
         $timeTableList[i][:changed] = 1
       end
     end
