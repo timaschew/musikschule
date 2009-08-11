@@ -4,7 +4,7 @@
 
 <p>
 <%= label :room_id, "Raum" %>
-<%= select_tag(:room_id, options_from_collection_for_select(@rooms, :id, :name)) %>
+<%= select_tag(:room_id, options_from_collection_for_select(@rooms, :id, :name), :room_id => 3) %>
 </p>
 <p>
 <%= label :date, "Datum:" %>
