@@ -19,7 +19,21 @@
 
 <h3>nach Schritt A</h3>
 
-<%= render :partial => "roomTimeTable" %> 
+
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% Room.find(:all).each do |r| %>
+			<th><%= r.name %></th>
+		<% end %>
+	</tr>
+	<%= render :partial => "roomTimeTable" %> 
+</table>
+</div>
+
+
+
 
 <%= "B:" + $scheduleBCourses.inspect %>
 <br/>

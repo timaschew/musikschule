@@ -402,5 +402,30 @@ class SchedulesController < ApplicationController
       end
     end
   end
-
+=begin
+	<% time = $TIMETABLESTART %>	
+	<% $TIMETABLEEND.times do %>
+		<tr>
+		<td><%= h time %>:00</td>
+		<% Room.find(:all).map(&:id).each do |r| %>
+			<% tmp = getForStartTimeAndRoom(time, 0, r) %>
+			<% if r == $busyRoomID && 
+				(time.to_i >= $busyStartH.to_i) &&
+				(time.to_i < $busyEndH.to_i || (time.to_i == $busyEndH.to_i && $busyEndM.to_i > 0)) %>
+				<% style = "style=\"background: red;\"" %>
+			<% elsif !tmp.nil? && tmp.key?(:changed) %>
+				<% style = "style=\"background: green;\"" %>
+			<% else %>
+				<% style = "" %>
+			<% end %>
+			<% if !tmp.nil? %>
+				<td <%= style %>><%= Course.find(tmp[:course]).name %></td>
+			<% else %>
+				<td <%= style %>>-</td>
+			<% end %>
+		<% end %> <!-- Raum-Schleife -->
+		</tr>
+		<% time += 1 %>
+	<% end %> <!-- Zeit-Schleife -->
+=end
 end
