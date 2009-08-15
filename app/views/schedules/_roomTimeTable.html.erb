@@ -1,6 +1,3 @@
-
-
-
 	<%- time2 = 0 %> 
 	<%- room_span = {} -%>
 	<%- time1 = $TIMETABLESTART -%>
@@ -15,7 +12,7 @@
 				<% courseNow = getForStartTimeAndRoom(time1, time2, r) %>
 				
 				<% if r == $busyRoomID && 
-					Time.mktime(0,1,1,time1.to_i, time2.to_i).between?(Time.mktime(0,1,1,$busyStartH,$busyStartM), Time.mktime(0,1,1,$busyEndH,$busyEndM)) %>
+					Time.mktime(0,1,1,time1.to_i, time2.to_i).between?(Time.mktime(0,1,1,$busyStartH,$busyStartM), Time.mktime(0,1,1,$busyEndH,$busyEndM) - 1) %>
 					<% style = "style=\"background: red;\"" %>
 				<% elsif !courseNow.nil? && courseNow.key?(:changed) %>
 					<% style = "style=\"background: green;\"" %>

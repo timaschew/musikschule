@@ -11,7 +11,7 @@ class CreateTeachers < ActiveRecord::Migration
 
       t.timestamps
     end
-    Fixtures.create_fixtures('test/fixtures', File.basename("teachers.yml", '.*'))
+    #Fixtures.create_fixtures('test/fixtures', File.basename("teachers.yml", '.*'))
   end
 
   def self.down
