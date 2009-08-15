@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090620125926) do
+ActiveRecord::Schema.define(:version => 20090815221150) do
 
   create_table "courselists", :force => true do |t|
     t.integer  "course_id"
@@ -68,10 +68,23 @@ ActiveRecord::Schema.define(:version => 20090620125926) do
     t.datetime "updated_at"
   end
 
-  create_table "schedules", :force => true do |t|
-    t.datetime "date"
+  create_table "schedule_actions", :force => true do |t|
     t.integer  "room_id"
+    t.time     "busy_start"
+    t.time     "busy_end"
+    t.integer  "flag",       :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "schedule_action_id",                :null => false
     t.integer  "course_id"
+    t.integer  "room_id"
+    t.time     "time"
+    t.integer  "flag",               :default => 0
+    t.integer  "up_range",           :default => 0
+    t.integer  "down_range",         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,9 +117,6 @@ ActiveRecord::Schema.define(:version => 20090620125926) do
     t.datetime "remember_token_expires_at"
     t.string   "firstname"
     t.string   "lastname"
-    t.string   "phone"
-    t.date     "birthday"
-    t.text     "comment"
   end
 
 end
