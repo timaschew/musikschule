@@ -3,11 +3,13 @@
 <% form_for(@courselist) do |f| %>
   <%= f.error_messages %>
 
+<p><%= "Kurs: " + @course.pretty_name %></p>
+<%= hidden_field_tag(:course_id, @course.id) %>
+<br/>
 <%= label :pupil_id, "Sch&uuml;ler:" %>
 <%= select_tag(:pupil_id, options_from_collection_for_select(@pupils, :id, :get_full_name)) %>
-<br/><br/>
-<%= label :course_id, "Kurs:" %>
-<%= select_tag(:course_id, options_from_collection_for_select(@courses, :id, :name)) %>
+
+
 
   <p>
     <%= f.label :Anmeldung %><br />

@@ -1,4 +1,4 @@
-<h1>Editing course</h1>
+<h1>Kurs editieren</h1>
 
 <% form_for(@course) do |f| %>
   <%= f.error_messages %>
@@ -9,22 +9,22 @@
   </p>
   <p>
     <%= f.label :start %><br />
-    <%= f.datetime_select :start %>
+    <%= f.time_select :start, {:minute_step => 15} %>
   </p>
   <p>
-    <%= f.label :duration %><br />
-    <%= f.datetime_select :duration %>
+    <%= f.label :ende %><br />
+    <%= f.time_select :duration, {:minute_step => 15} %>
   </p>
   <p>
-    <%= f.label :weekday %><br />
+    <%= f.label :Wochentag %><br />
     <%= f.text_field :weekday %>
   </p>
   <p>
-    <%= f.label :coursetype %><br />
+    <%= f.label :Einzelunterricht %><br />
     <%= f.check_box :coursetype %>
   </p>
   <p>
-    <%= f.label :honorartype %><br />
+    <%= f.label :honorarTyp %><br />
     <%= f.check_box :honorartype %>
   </p>
   <p>
@@ -32,13 +32,13 @@
     <%= f.text_field :honorar %>
   </p>
   <p>
-    <%= f.label :comment %><br />
+    <%= f.label :Kommentar %><br />
     <%= f.text_area :comment %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Speichern' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Details', @course %> |
+<%= link_to 'Zur&uuml;ck', courses_path %>

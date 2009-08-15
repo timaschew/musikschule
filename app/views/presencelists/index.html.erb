@@ -1,30 +1,8 @@
 	<script type="text/javascript" charset="utf-8">
 			$(function()
-            {
-				$('.date-pick').datePicker()
-				$('#start-date').bind(
-					'dpClosed',
-					function(e, selectedDates)
-					{
-						var d = selectedDates[0];
-						if (d) {
-							d = new Date(d);
-							$('#end-date').dpSetStartDate(d.addDays(1).asString());
-						}
-					}
-				);
-				$('#end-date').bind(
-					'dpClosed',
-					function(e, selectedDates)
-					{
-						var d = selectedDates[0];
-						if (d) {
-							d = new Date(d);
-							$('#start-date').dpSetEndDate(d.addDays(-1).asString());
-						}
-					}
-				);
-            });
+			{
+				$('.date-pick').datePicker({startDate:'01/01/2000'});
+			});
 		</script>
 
 <h1>Listing presencelists</h1>
@@ -54,16 +32,13 @@
 
 <p>Herzlich Willkommen, Sie sind eingeloggt als <%= @firstname + " " + @lastname %></p>
 <p>Sie haben zur Zeit <%= @courses.count %> Kurse</p>
-
+<% todayDate = Time.now.strftime("%d") + "/" + Time.now.strftime("%m") + "/" + Time.now.strftime("%Y") %>
 <div class="simpleBorder">
 <table>
 	<tr>
-		<th>Kurs-Nr.</th>
-		<th>Name</th>
 		<th>Wochentag</th>
 		<th>Uhrzeit</th>
 		<th>Anfang</th>
-		<th>Ende</th>
 		<th>Liste generieren</th>
 	</tr>
 <% displayDate = true %>
@@ -77,21 +52,22 @@
 			when 5 	then	"Freitag"
 		end %>
 		<tr>
-			<form <%= "id=\"chooseDateForm" + @course.id.to_s + "\"" %> action="presencelists/generate">
-			<td><input type="text" name="list[course]" id="liste_course" disabled="disabled" <%= "value=\"" + @course.id.to_s + "\" />" %></td>
-			<td><%= @course.name %></td>
-			<td><%= day %></td>
-			<td><%= @course.start.strftime("%H:%M") %></td>
-			<% if displayDate == true %>
-				<% displayDate = false %>
-				<td rowspan=<%= "\"" + @courses.count.to_s + "\"" %>><input <%= "id=\"start-date\"" %> class="date-pick" /></td>
-				<td rowspan=<%= "\"" + @courses.count.to_s + "\"" %>><input <%= "id=\"end-date\"" %> class="date-pick" /></td>
+			
+			<% form_tag :action => "generate" do %>
+				<%= hidden_field_tag(:course_id, @course.id) %>
+				<%- if @course.weekday == Time.now.wday -%>
+					<td><b><%= day %></b></td>
+				<%- else -%>
+					<td><%= day %></td>
+				<%- end -%>
+				<td><%= @course.start.strftime("%H:%M") %></td>
+				<td><%= text_field_tag :date, todayDate, :class => "date-pick" %></td>
+				<td><%= submit_tag "Liste erzeugen" %></td>
 			<% end %>
-			<td><input <%= "id=\"presencelist" + @course.id.to_s + "\"" %> name="commit" type="submit" value="erstellen" /></td>
-			</form>
 		</tr>
 	<% end %>
 <% end %>
 </table>
 
 </div>
+

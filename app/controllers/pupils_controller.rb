@@ -2,7 +2,7 @@ class PupilsController < ApplicationController
   # GET /pupils
   # GET /pupils.xml
   def index
-    @pupils = Pupil.all
+    @pupils = Pupil.all(:order => :lastname)
 
     respond_to do |format|
       format.html # index.html.erb

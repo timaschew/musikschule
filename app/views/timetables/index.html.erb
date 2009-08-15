@@ -1,16 +1,33 @@
 <h1>Listing rooms</h1>
 
+<h2>Nach R&auml;umen</h2>
 <table>
   <tr>
-    <th>Name</th>
+    <th>Raum</th>
   </tr>
 
 <% @rooms.each do |room| %>
   <tr>
-    <td><%= h room.name %></td>
-	<td><%= link_to "Timetable", :controller => "timetables",
-	                      :action => "show",
-	                      :params => { :id => room} %> (<%= h room.courses.count %> entries)</td>
+    <td><%= room.name %></td>
+	<td><%= link_to "Stundenplan", :controller => "timetables",
+	                      :action => "show_room",
+	                      :params => { :id => room} %> (<%= h room.courses.count %> Kurse gefunden)</td>
+  </tr>
+<% end %>
+</table>
+
+
+<h2>Nach Wochentag</h2>
+<table>
+  <tr>
+    <th>Tag</th>
+  </tr>
+<% 5.times do |day| %>
+  <tr>
+    <td><%= Time.mktime(0,5,day+1).strftime("%A") %></td>
+	<td><%= link_to "Stundenplan", :controller => "timetables",
+	                      :action => "show_day",
+	                      :params => { :day => (day+1)} %> (<%= h Course.find_all_by_weekday(day+1).count %> Kurse gefunden)</td>
   </tr>
 <% end %>
 </table>

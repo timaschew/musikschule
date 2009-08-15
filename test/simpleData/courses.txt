@@ -1,0 +1,304 @@
+#TABLE courses
+#t.string   "name"
+#t.integer  "teacher_id"
+#t.integer  "subject_id"
+#t.integer  "room_id"
+#t.time     "start"
+#t.time     "duration"
+#t.integer  "weekday"
+#t.boolean  "coursetype"
+#t.boolean  "honorartype"
+#t.decimal  "honorar",     :precision => 8, :scale => 2
+#t.text     "comment"
+#t.datetime "created_at"
+#t.datetime "updated_at"
+#
+# Beispiel:
+#  name: "Gesang R6"
+#  room: dachboden
+#  coursetype: true
+#  weekday: 1
+#  start: "14:00"
+#  duration: "15:00"
+#  subject: gesang
+#  teacher: renz
+#
+#
+# LEHRER IDs
+# 1  valentina
+# 2  igor
+# 3  root
+# 4  aden
+# 5  schmidt
+# 6  hagen
+# 7  knirr
+# 8  medvedeva
+# 9  schmitz
+# 10 renz
+# 11 andabaka
+#
+# ROOM IDs
+# 1 klavierRaum
+# 2 saal
+# 3 keyboardRaum
+# 4 schlagzeugRaum
+# 5 dachboden
+#
+# UNTERRICHT IDs
+# 1 klavier
+# 2 keyboard
+# 3 gitarre
+# 4 egitarre
+# 5 bassgitarre
+# 6 schlagzeug
+# 7 geige
+# 8 gesang
+# 9 kunst
+#10 frueherziehung
+#
+#
+# neues FORMAT:
+# FORMEL: 	-Lehrer-Tag-Unterricht-Raum 
+# BSP: 		-hagen-1-klavier-keyboardRaum  ====> J.Hagen am Montag Klavierunterricht im Keyboard-Raum
+#
+# BSP: 		-root-2-keyboard-schlagzeugRaum ====> E.Root am Dienstag Keyboardunteerricht im Schlagzeugraum
+#
+# Einzelunterricht wird mit einem + bei der Start-Uhrzeit markiert
+#
+#
+#montag joachim
+-schmidt-1-gitarre-saal
+13:15+
+14:00
+
+14:00+
+14:30
+
+14:30+
+15:00
+
+15:00
+15:30
+
+15:30+
+16:00
+
+16:00+
+16:30
+
+16:30
+17:00
+
+17:15+
+18:00
+
+18:00+
+18:45
+
+18:45
+19:30
+
+19:45
+20:15
+
+# montag igor 
+-igor-1-keyboard-keyboardRaum
+15:15
+16:00
+
+16:00
+16:45
+
+# montag olaf
+-knirr-1-schlagzeug-schlagzeugRaum
+14:00+
+14:30
+
+14:30+
+15:00
+
+15:00+
+15:30
+
+15:30+
+16:00
+
+16:00+
+16:30
+
+16:30+
+17:00
+
+17:00+
+17:30
+
+17:30+
+18:00
+
+18:00+
+18:30
+
+
+# dienstag hagen
+-hagen-2-gitarre-saal
+14:30+
+15:00
+
+15:00
+16:00
+
+16:00
+17:00
+
+# dienstag igor keyboard 
+-igor-2-keyboard-keyboardRaum
+16:00
+16:45
+
+19:15
+20:00
+
+-igor-2-trompete-keyboardRaum
+16:45+
+17:15
+
+-igor-2-sax-keyboardRaum
+18:00+
+18:30
+
+# Band am Dienstag
+-igor-2-band-schlagzeugRaum
+18:00
+19:00
+
+# Dienstag Gesang
+-renz-2-gesang-klavierRaum
+15:30+
+16:15
+
+16:15+
+17:00
+
+17:00
+17:45
+
+17:45
+18:30
+
+# schlagzeug mittwoch
+-anton-3-schlagzeug-schlagzeugRaum
+15:30+
+16:00
+
+16:00+
+16:30
+
+# mittwoch klavier
+-medvedeva-3-klavier-klavierRaum
+16:45+
+17:30
+
+17:30+
+18:00
+
+18:00+
+18:30
+
+18:30+
+19:00
+
+19:00+
+19:30
+
+# Andabaka Donnerstag
+-andabaka-4-kunst-saal
+17:30
+19:00
+
+# Hagen Donnerstag
+-hagen-4-gitarre-keyboardRaum
+14:45
+15:15
+
+15:45
+16:15
+
+16:15
+17:00
+
+17:00
+17:45
+
+17:45+
+18:15
+
+18:15
+19:00
+
+#igor donnerstag sax
+-igor-4-sax-klavierRaum
+17:00+
+17:30
+
+17:30+
+18:00
+
+# freitag 
+-root-5-kunst-saal
+14:45
+16:15
+
+#menno
+-aden-5-gitarre-keyboardRaum
+14:00
+14:45
+
+14:45
+15:30
+
+15:30
+16:15
+
+16:15+
+16:45
+
+16:45+
+17:15
+
+17:15+
+17:45
+
+17:45+
+18:15
+
+18:15
+18:45
+
+18:45
+19:15
+
+19:15
+20:00
+
+-medvedeva-5-klavier-klavierRaum
+14:15+
+15:00
+
+15:00+
+15:30
+
+15:30+
+16:00
+
+16:00+
+16:45
+
+16:45+
+17:15
+
+17:15+
+17:45
+
+17:45+
+18:30
+

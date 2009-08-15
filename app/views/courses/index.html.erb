@@ -1,34 +1,40 @@
 <h1>Listing courses</h1>
-
+<br/>
+<%= link_to 'Neuer Kurs', new_course_path %>
+<br/><br/>
 <table>
   <tr>
-    <th>Name</th>
+	<th>Lehrer</th>
+	<th>Raum</th>
+	<th>Fach</th>
     <th>Start</th>
-    <th>Duration</th>
-    <th>Weekday</th>
-    <th>Coursetype</th>
-    <th>Honorartype</th>
+    <th>Ende</th>
+    <th>Wochentag</th>
+    <th>Einzelunterricht</th>
+    <th>HonorarTyp</th>
     <th>Honorar</th>
-    <th>Comment</th>
+    <th>Kommentar</th>
   </tr>
 
 <% @courses.each do |course| %>
   <tr>
-    <td><%=h course.name %></td>
+	<td><%=h course.teacher.get_name %></td>
+	<td><%=h course.room.name %></td>
+	<td><%=h course.subject.name %></td>
     <td><%=h course.start.strftime("%H:%M") %></td>
     <td><%=h course.duration.strftime("%H:%M") %></td>
-    <td><%=h course.weekday %></td>
-    <td><%=h course.coursetype %></td>
+    <td><%=h Time.mktime(0,5,course.weekday).strftime("%A") %></td>
+    <td><%=h course.coursetype == false ? "nein" : "ja" %></td>
     <td><%=h course.honorartype %></td>
     <td><%=h course.honorar %></td>
     <td><%=h course.comment %></td>
-    <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Details', course %></td>
+    <td><%= link_to '&Auml;ndern', edit_course_path(course) %></td>
+    <td><%= link_to 'L&ouml;schen', course, :confirm => 'Ganz sicher?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New course', new_course_path %>
+<%= link_to 'Neuer Kurs', new_course_path %>

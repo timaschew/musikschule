@@ -231,19 +231,12 @@
           <li>
             <h3>Join the community</h3>
             <ul class="links">
-              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
-              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
-              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
             </ul>
           </li>
           
           <li>
             <h3>Browse the documentation</h3>
             <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
             </ul>
           </li>
         </ul>
@@ -251,83 +244,31 @@
 
       <div id="content">
         <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
+          <h1>Musik &ndash; &amp; Kunstschule Wilhelm</h1>
         </div>
 
         <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
           <div id="about-content" style="display: none"></div>
         </div>
         
         <div id="getting-started">
-          <h1>Getting started</h1>
           <h2>Übersicht der Funktionen</h2>
           
           <ul>
 			<li>Datensätze anzeigen
 				<ul>
-					<li><a href="pupils">Pupils</a></li>
-					<li><a href="teachers">Teachers</a></li>
-					<li><a href="courses">Courses</a></li>
-					<li><a href="courselists">Courselists</a></li>
-					<li><a href="rooms">Rooms</a></li>
-					<li><a href="subjects">Subjects</a></li>		
+					<li><a href="pupils">Sch&uuml;ler</a></li>
+					<li><a href="teachers">Lehrer</a></li>
+					<li><a href="courses">Kurse</a></li>
+					<li><a href="courselists">Kurs-Zuweisung (Kurs&lt;--&gt;Sch&uuml;er)</a></li>
+					<li><a href="rooms">R&auml;ume</a></li>
+					<li><a href="subjects">Unterrichtsf&auml;cher</a></li>		
 				</ul>
 			</li>
-			<li><a href="timetables">Timetable</a></li>
-			<li><a href="presencelists">Presencelists</a></li>
-			<li><a href="schedules"><b>Scheduler</b></a></li>
+			<li><a href="timetables">Stundenplan</a></li>
+			<li><a href="presencelists">Anwesenheitsliste</a></li>
+			<li><a href="schedules"><b>Raumplaner / -verschieber</b></a></li>
 		</ul>	
-		<h3>Beschreibung:</h3>
-			<button class="m1">Meilenstein 1 (show/hide)</button><br/><br/>
-			<button class="m2">Meilenstein 2 (show/hide)</button><br/><br/>
-			<button class="m3">Meilenstein 3 (show/hide)</button><br/><br/>
-			<button class="m4">Meilenstein 4+ (show/hide)</button>
-			<p class="m1s">
-			Die Struktur für die Tabellen bzw. Klassen wurden mit dem scaffold Generator erstellt, danach habe ich die Assoziationen zwischen den Tabellen nachgetragen und mit den Migrations-Befehlen aktualisiert.<br/>
-			Für die Tabellen habe ich Fixtures erstellt (für pupils und courselists chabe ich ein extra Fixtures-Generator geschrieben) und damit die Datenbank mit Daten befüllt.<br/>
-			Auf der Startseite von courselists habe ich ein simplen Join-Befehl benutzt um die Fremschlüssel-ID's in lesbare Namen umzuwandeln.<br/>
-			Danach habe ich den Controller und die View für den Stundenplan (timetables) entworfen.
-			<br/><br/>
-			<b>Scaffolding:</b> automatische "Gerüsterstellung" für ein Struktur. Man kann alle MVC-Ansichten für die CRUD (Create, Read, Update, Delete) Funktionen damit generieren lassen.<br/><br/>
-			<b>Fixtures:</b> in einer Datei abgespeicherte Datensätze die per Befehl (rake db:fixtures:load) für alle Tabellen geladen werden können</p>
-			<h1 class="m1s">Los geht's</h1>
-			<p class="m1s"><b>Einige Hinweise:</b><br/>
-				Der Link oben auf der Seite "About your application’s environment" sollte funktionieren, wenn nicht, ist die Datenbank nicht richtig eingstellt. Es wird eine sqlite3 Datenbank verwendet, ggf. muss diese mit gem install sqlite3 nachinstalliert werden<br/><br/>
-				<b>Datenbank - Befehle</b><br/>
-					Befehle für die Konsole (man muss sich Arbeitsverzeichnis des Ruby-Projektes befinden)<br/>
-					Datenbank neu anlegen: <u>rake db:create</u><br/>
-					Datenbank reset: <u>rake db:reset</u><br/>
-					Migration ausführen: <u>rake db:migrate</u><br/>
-					Fixtures (Datensätze) laden: <u>rake db:fixtures:load</u><br/><br/>
-					Die Fixtures können auch erweitert werden und das Ergebnis kann man sich dann gleich anzeigen lassen, z.B.<br/>
-					Im Ordner test/fixtures/courses.yml kann man weitere Datensätze anlegen mit <u>rake db:fixtures:load</u> aktualisieren
-					Danach wird der Datensatz auch im Stundenplan (timetables) auftauchen
-				</p>
-				<p class="m2s">
-					Die URL mit dem presencelists als Verzeichnis ist nun aufrufbar. Der gesamte presencelists - Controller ist geschützt. Falls man noch nicht eingeloggt ist, wird man automatisch zur Login-Seite weitergeleitet.<br/>
-					<b>Zugangsdaten: </b>test / test<br/><br/>
-					Es gibt für jeden Lehrer ein Login-Account. Damit kann der Lehrer die geschützte Seite aufrufen, es tauchen alle Kurse von ihm auf und er kann auswählen für welchen Kurs und für welchen Zeitraum die Anwesenheitsliste generiert wird.<br/>
-					Anschließend wird er auf die Seite weitergeleitet, wo das dynamische Formular dann erzeugt wird.<br/><br/>
-					Der Login-Controller habe ich als Plugin zu meinem Projekt erweitert (restful_authentication)<br/><br/>
-					Momentan sind sind die neuen Funktionen noch nicht 100% dynamisch<br/>
-					Die Login-User und die Lehrer (Users und Teachers) müssen noch gekoppelt werden. Momentan kann man sich nur als User <u>test</u> anmelden und man wird anschließend immer als Lehrer mit der ID 6 im presencelists-Controller erkannt.<br/>
-					Die Übergabe der Formular-Daten auf der presencelists Seite werden noch nicht an die nächste Seite weitergegeben.
-					
-				</p>
-				<p class="m3s">
-				Beim Raum-Scheduler kann man einen Raum an einem Tag für einen bestimmten Zeitraum "sperren". Alle Kurse die in diesem Zeitraum eigentlich stattfinden werden umgelegt. Zuerst wird nach einem passenden freien Raum gesucht. Falls kein passender Raum gefunden wird, wird versucht die anderen Kurse umzulegen, sodass ein passender Raum frei wird. (der 2. Fall ist noch nicht implementiert).
-				</p>
-				<p class="m4s">
-				Der <b><a href="schedules">schedules</a></b> Controller kann nun Kurse in andere Räume umlegen.<br/><br/>
-				<u>Variante 1:</u> Der Kurs findet zur gleichen Zeit in einem anderen Raum statt (funktioniert).<br/><br/>
-				<u>Variante 2:</u> Der Kurs findet im gleichen Raum zur anderen Zeit statt (in Bearbeitung):<br/>
-				- Falls ein Kurs dabei ist, dessen Zeit geändert werden muss, wird der Benutzer aufgeforder für die jeweiligen Kurse (es können mehrere sein) ein Zeit-Limit einzustellen. (funktioniert)<br/>
-				- Innerhalb dieses Zeitlimits werden freie Zeiträume gesucht (in Bearbeitung)<br/><br/>
-				<u>Variante 3:</u> Kurs findet im anderen Raum und zur anderen Zeit statt (noch nicht implementiert, ist aber eigentlich nur eine Abwandlung von Variante 2 (mit verschiedenen Räumen das ganze)<br/><br/>
-				<u>Variante 4:</u> Kurs werden versucht rekursiv umgelegt zu werden (noch nicht implementiert).
-				</p>
         </div>
       </div>
       

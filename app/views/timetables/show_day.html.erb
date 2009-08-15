@@ -1,0 +1,13 @@
+<h1>Kursübersicht für Tag <%= @weekday_string %></h1>
+
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% @allRooms.each do |r| %>
+			<th><%= h r.name %>
+		<% end %>
+	</tr>
+	<%= render :partial => "print_room_table" %>
+</table>
+</div>

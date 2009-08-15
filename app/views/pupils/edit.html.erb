@@ -4,37 +4,37 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :firstname %><br />
+    <%= f.label :Vorname %><br />
     <%= f.text_field :firstname %>
   </p>
   <p>
-    <%= f.label :lastname %><br />
+    <%= f.label :Nachname %><br />
     <%= f.text_field :lastname %>
   </p>
   <p>
-    <%= f.label :phone %><br />
+    <%= f.label :Telefon %><br />
     <%= f.text_field :phone %>
   </p>
   <p>
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
+    <%= f.label :Geburtstag %><br />
+    <%= f.date_select :birthday, :start_year => 1930, :end_year => 2008, :order => [:day, :month, :year], :use_month_numbers => true %>
   </p>
   <p>
-    <%= f.label :gender %><br />
+    <%= f.label :Geschlecht %><br />
     <%= f.check_box :gender %>
   </p>
   <p>
-    <%= f.label :flags %><br />
+    <%= f.label :Info %><br />
     <%= f.text_field :flags %>
   </p>
   <p>
-    <%= f.label :comment %><br />
+    <%= f.label :Kommentar %><br />
     <%= f.text_area :comment %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Speichern' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @pupil %> |
-<%= link_to 'Back', pupils_path %>
+<%= link_to 'Details', @pupil %> |
+<%= link_to 'Zur&uuml;ck', pupils_path %>

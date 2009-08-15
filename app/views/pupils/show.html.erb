@@ -1,38 +1,49 @@
 <p>
-  <b>Firstname:</b>
+  <b>Vorname:</b>
   <%=h @pupil.firstname %>
 </p>
 
 <p>
-  <b>Lastname:</b>
+  <b>Nachname:</b>
   <%=h @pupil.lastname %>
 </p>
 
 <p>
-  <b>Phone:</b>
+  <b>Telefon:</b>
   <%=h @pupil.phone %>
 </p>
 
 <p>
-  <b>Birthday:</b>
-  <%=h @pupil.birthday %>
+  <b>Geburtstag:</b>
+  <%=h @pupil.birthday.to_s %>
 </p>
 
 <p>
-  <b>Gender:</b>
-  <%=h @pupil.gender %>
+  <b>Geschlecht:</b>
+  <%= @pupil.gender == false ? "w" : "m" %>
 </p>
 
 <p>
-  <b>Flags:</b>
+  <b>Info:</b>
   <%=h @pupil.flags %>
 </p>
 
 <p>
-  <b>Comment:</b>
+  <b>Kommentar:</b>
   <%=h @pupil.comment %>
 </p>
 
+<p>
+	Kurse:
+	<ul>
+		<%- @pupil.courselists.each do |list| -%>
+		<li><%= link_to list.course.pretty_name, list.course %></li>
+		<%- end -%>
+	</ul>	
+</p>
 
-<%= link_to 'Edit', edit_pupil_path(@pupil) %> |
-<%= link_to 'Back', pupils_path %>
+<%= link_to 'neuer Kurs', '../courselists/new_course_for_user/0?pupil=' + @pupil.id.to_s %>
+
+<br/><br/>
+<%= link_to '&Auml;ndern', edit_pupil_path(@pupil) %> |
+<%= link_to 'Zur&uuml;ck', pupils_path %>

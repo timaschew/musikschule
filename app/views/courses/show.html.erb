@@ -5,26 +5,26 @@
 
 <p>
   <b>Start:</b>
-  <%=h @course.start %>
+  <%=h @course.start.strftime("%H") + ":" + @course.start.strftime("%M") %>
 </p>
 
 <p>
-  <b>Duration:</b>
-  <%=h @course.duration %>
+  <b>Ende:</b>
+  <%=h @course.duration.strftime("%H") + ":" + @course.duration.strftime("%M") %>
 </p>
 
 <p>
-  <b>Weekday:</b>
-  <%=h @course.weekday %>
+  <b>Wochentag:</b>
+  <%=h Time.mktime(0,5,@course.weekday).strftime("%A") %>
 </p>
 
 <p>
-  <b>Coursetype:</b>
-  <%=h @course.coursetype %>
+  <b>Einzelunterricht:</b>
+  <%=h @course.coursetype == false ? "nein" : "ja" %>
 </p>
 
 <p>
-  <b>Honorartype:</b>
+  <b>HonorarTyp:</b>
   <%=h @course.honorartype %>
 </p>
 
@@ -34,10 +34,21 @@
 </p>
 
 <p>
-  <b>Comment:</b>
+  <b>Kommentar:</b>
   <%=h @course.comment %>
 </p>
 
+<p>
+	Sch&uuml;ler
+	<ul>
+		<%- @course.courselists.each do |list| -%>
+		<li><%= link_to list.pupil.get_full_name, list.pupil %></li>
+		<%- end -%>
+	</ul>	
+	<%# debug @course %>
+</p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'neuer Sch&uuml;ler', '../courselists/new_pupil_for_course/0?course=' + @course.id.to_s %>
+<br/><br/>
+<%= link_to '&Auml;ndern', edit_course_path(@course) %> |
+<%= link_to 'Zur&uuml;ck', courses_path %>

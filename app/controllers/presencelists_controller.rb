@@ -11,7 +11,9 @@ class PresencelistsController < ApplicationController
       @lastname = current_user.lastname
       @id = current_user.id
       
-      @courses = Course.find_all_by_teacher_id(6)
+      #teacher = get_teacher(current_user.firstname, current_user.lastname)
+      teacher = Teacher.find_by_firstname_and_lastname(firstname, lastname)
+      @courses = teacher.courses.find(:all, :order => "weekday, start")
       
     end
     #else : login form, automatic redirection, when user is not logged in (before_filter)
@@ -34,15 +36,36 @@ class PresencelistsController < ApplicationController
   
   def generate
     
-    @course = 2
-    @startDate = "2009-06-08"
-    @endDate = "2009-06-08"
-    @datePrefix = "2009-06-"
-    @days = ["08", "15", "22", "29"]
-    @foundList = Courselist.find_all_by_course_id(2)
+    #render :text => "#{params.inspect}"
+    
+    @course = params[:course_id].to_i unless params['course_id'] == ""
+    dateParam = params[:date]
+    
+    day = dateParam[0,2].to_i
+    month = dateParam[3,2].to_i
+    year = dateParam[6,4].to_i
+    logger.debug "date = #{day} #{month} #{year}"
+    
+    date1 = Date.new(year, month, day)
+    beginning_weekday = date1.beginning_of_day
+    end_weekday = date1.end_of_week
+    
+    @date_prefix = "#{year}-#{month}-"
+    @days = ["#{day}"]
+    teacher = get_teacher(current_user.id)
+    @courses = teacher.courses.find(:all, :order => "weekday, start")
+
+    #@foundList = Courselist.find_all_by_course_id(2)
+    @foundList = Course.find(@course).courselists
     @pupils = @foundList.map(&:pupil_id)
 
     
+    
+  end
+  
+  def saving
+    
+    logger.debug "parameter: #{params.inspect}"
     
   end
 
@@ -116,6 +139,16 @@ class PresencelistsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(presencelists_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  private
+
+  def get_teacher(user_id)
+    if user_id == 51 # vom Hagen
+      teacher = Teacher.find_by_lastname("vom Hagen")
+    elsif user_id == 52 # vom Andabaka
+      teacher = Teacher.find_by_lastname("Andabaka")
     end
   end
   

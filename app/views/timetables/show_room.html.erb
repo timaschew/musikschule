@@ -1,0 +1,20 @@
+<% room = @room %>
+
+<h1>Stundenplan für <%= h room.name %></h1>
+<p>Es wurden <b><%= room.courses.count %></b> Kurse für den Raum gefunden</p>
+
+<hr>
+<p></p>
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<th>Montag</th>
+		<th>Dienstag</th>
+		<th>Mittwoch</th>
+		<th>Donnerstag</th>
+		<th>Freitag</th>
+	</tr>
+<%= render :partial => "print_time_table" %>
+</table>
+</div>

@@ -1,4 +1,4 @@
-<h1>Presencelist <%= @startDate + " - " + @endDate %></h1>
+<h1>Presencelist</h1>
 <!--
 @course = 2
 @startDate = "2009-06-08"
@@ -10,26 +10,29 @@
 -->
 
 <br/><br/>
-<div class="simpleBorder">
-<table>
-	<tr>
-		<th>Pupil</th>
-		<% @days.each do |day| %>
-			<th><%= @datePrefix + day %></th>
-		<% end %>
-	</tr>
-
-<% @pupils.each do |pID| %>
-	<tr>
-	<td><%= Pupil.find(pID).firstname + " " + Pupil.find(pID).lastname %></td>
-	<% @days.each do |day| %>
-		<td><input type="checkbox" <%= "name=\"status_" + @datePrefix + day + "\">" %></td>
-	<% end %>
-	</tr>
-<% end %>
-
-
-</table>
-</div>
-<br/><br/>
-<button>Save</button>
+<% form_tag :action => "saving" do %>
+	<div class="simpleBorder">
+	<table>
+		<tr>
+			<th>Sch&uuml;ler</th>
+			<% @days.each do |day| %>
+				<th><%= @date_prefix + day %></th>
+			<% end %>
+			<th>Kommentar</th>
+		</tr>
+		<% @pupils.each do |pID| %>
+			<tr>
+			<td><%= Pupil.find(pID).get_full_name %></td>
+			<% @days.each do |day| %>
+				<td><% form_name = "status_" + pID.to_s + "[" + @date_prefix + day + "]" %>
+				<%= check_box_tag form_name, 1 %></td>
+				<td><%= text_area_tag :comment %></td>
+			<% end %>
+			</tr>
+		<%- end -%>
+		
+	</table>
+	</div>
+	<br/><br/>
+	<%= submit_tag "Speichern" %>
+<%- end -%>

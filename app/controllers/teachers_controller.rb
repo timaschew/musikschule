@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.xml
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.find(:all, :order => :lastname)
 
     respond_to do |format|
       format.html # index.html.erb

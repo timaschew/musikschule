@@ -1,32 +1,39 @@
 <h1>Listing pupils</h1>
-
+<br/>
+<%= link_to 'Neuer Sch&uuml;ler', new_pupil_path %>
+<br/><br/>
 <table>
   <tr>
     <th>Vorname</th>
     <th>Nachname</th>
-    <th>Phone</th>
-    <th>Birthday</th>
-    <th>Gender</th>
-    <th>Flags</th>
-    <th>Comment</th>
+    <th>Telefon</th>
   </tr>
 
 <% @pupils.each do |pupil| %>
   <tr>
+	<% pupilID = pupil.id %>
+	
     <td><%=h pupil.firstname %></td>
     <td><%=h pupil.lastname %></td>
     <td><%=h pupil.phone %></td>
+	<!-- 
     <td><%=h pupil.birthday %></td>
-    <td><%=h pupil.gender %></td>
+    <td><%=h pupil.gender == false ? "w" : "m" %></td>
     <td><%=h pupil.flags %></td>
     <td><%=h pupil.comment %></td>
-    <td><%= link_to 'Show', pupil %></td>
-    <td><%= link_to 'Edit', edit_pupil_path(pupil) %></td>
-    <td><%= link_to 'Destroy', pupil, :confirm => 'Are you sure?', :method => :delete %></td>
+	-->
+	
+	<td><%= link_to 'Kurse', 'courselists/index/0?pupil=' + pupil.id.to_s %></td>
+	<td><%= link_to 'neuer Kurs', 'courselists/new_course_for_user/0?pupil=' + pupil.id.to_s %></td>
+	<td></td>
+    <td><%= link_to 'Details', pupil %></td>
+    <td><%= link_to '&Auml;ndern', edit_pupil_path(pupil) %></td>
+    <td><%= link_to 'L&ouml;schen', pupil, :confirm => 'Ganz sicher?', :method => :delete %></td>
+	
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New pupil', new_pupil_path %>
+<%= link_to 'Neuer Sch&uuml;ler', new_pupil_path %>

@@ -1,0 +1,40 @@
+<% time2 = 0 %> 
+<% room_span = {} %>
+<% time1 = $TIMETABLESTART %>
+<% range = $TIMETABLEEND * 4%>	
+<%- range.times do -%>
+	<tr><%- until_time = ((time2 + 15) unless time2 == 45) || 0 -%>
+		<td><%= h time1 %>:<%= time2.to_i.zero? ? "00" : time2 %> - <%= h until_time == 0 ? (time1 + 1) : time1 %>:<%= until_time.to_i.zero? ? "00" : until_time %></td>
+		<%# Schleife über 5 Werktage
+		  # Es wird für jede Stunde geprüft ob ein Kurs zum aktuellen Tag und dem aktuellen Raum existiert 
+		  # Wenn zwei oder mehr Kurse für die selbe Zeit eingetragen sind, erscheint eine Fehlermeldung %>
+		<%- 5.times do |day| -%>
+			<%- courseNow = Course.find(:all, :conditions => "start like '#{time1}:#{time2}%' AND weekday = #{day+1} AND room_id = #{@room.id}") -%>
+			<%- if courseNow.count > 1 -%>
+				<td class="timeTableCell"> <p class="warning">Überschneidung!</td>
+			<%- elsif !courseNow[0].nil? -%>
+				<%- room_span[day+1] = ((courseNow[0].duration - courseNow[0].start) / 900).to_i -%>
+				<%- logger.debug ">>>> Tag #{day+1} >>> Zeit #{time1}:#{time2} >>> #{room_span[day+1]}" -%>
+				<td class="timeTableCell" rowspan="<%= room_span[day+1] %>">
+				<%= link_to courseNow[0].name_and_subject, courseNow[0] %>
+			<%- else -%>
+				<%- if (room_span[day+1].to_i-1) <= 0 -%>
+					<td class="timeTableCell"></td>
+				<%- else -%>
+					<%- room_span[day+1] -= 1 -%>
+					<%- logger.debug ">>>> Tag #{day+1} >>> Zeit #{time1}:#{time2} > -- #{room_span[day+1]}" -%>
+				<%- end -%>
+				</td>
+			<%- end -%>
+			
+		<%- end -%>
+
+	</tr>
+	<% time2 += 15%>
+	<% if time2 > 45 %>
+		<% time2 = 0 %>
+	<% end %>
+	<% if time2 == 0 %>
+		<% time1 += 1 %>
+	<% end %>
+<% end %>

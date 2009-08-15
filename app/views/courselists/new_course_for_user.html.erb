@@ -3,9 +3,13 @@
 <% form_for(@courselist) do |f| %>
   <%= f.error_messages %>
 
-<%= label :pupil_id, "Sch&uuml;ler:" %>
-<%= select_tag(:pupil_id, options_from_collection_for_select(@pupils, :id, :get_full_name)) %>
-<br/><br/>
+<%# label :pupil_id, "Sch&uuml;ler:" %>
+<%# select_tag(:pupil_id, options_from_collection_for_select(@pupils, :id, ['lastname', 'firstname'])) %>
+
+<p><%= @pupil.firstname + " " + @pupil.lastname %></p>
+
+<%= hidden_field_tag(:pupil_id, @pupil.id) %>
+
 <%= label :course_id, "Kurs:" %>
 <%= select_tag(:course_id, options_from_collection_for_select(@courses, :id, :name)) %>
 
@@ -18,11 +22,11 @@
   </p>
   <p>
     <%= f.label 'gekündigt' %><br />
-    <%= f.check_box :canceled %>
+    <%= f.check_box :canceled, :order => [:day, :month, :year], :use_month_numbers => true %>
   </p>
   <p>
     <%= f.label 'Kündigung' %><br />
-    <%= f.date_select :quit, :order => [:day, :month, :year], :use_month_numbers => true %>
+    <%= f.date_select :quit %>
   </p>
   <p>
     <%= f.label :Kommentar %><br />
