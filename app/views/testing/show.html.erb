@@ -1,0 +1,18 @@
+<h1>Schedule Action ID = <%= @schedule_action.id %></h1>
+
+<h2>ScheduleActions</h2>
+<%= debug @schedule_action %>
+
+Schedules:
+<ul>
+	<%- @schedules.each do |s| -%>
+		<li><%= debug s %></li>
+	<%- end -%>
+</ul>
+
+Small Rooms
+<ul>
+	<%- @small_rooms.each do |s| -%>
+		<li><%= debug s %></li>
+	<%- end -%>
+</ul>

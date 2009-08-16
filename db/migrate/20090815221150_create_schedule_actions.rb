@@ -5,6 +5,7 @@ class CreateScheduleActions < ActiveRecord::Migration
       t.integer :room_id
       t.time :busy_start
       t.time :busy_end
+      t.date :date
       t.integer :flag, :default => 0
       
       t.timestamps

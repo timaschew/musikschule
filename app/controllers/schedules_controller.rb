@@ -8,6 +8,31 @@ class SchedulesController < ApplicationController
 		@rooms = Room.find(:all)
 	end
 	
+	def search
+	  
+	  # if no session is set or the data is deleted from db, generate new Action and set new session
+	  if session[:schedule].nil? || ScheduleAction.find(:all, :conditions => {:id => session[:schedule]}).empty?
+      action = ScheduleAction.new
+      action.save
+      session[:schedule] = action.id
+    end
+    
+    @action = ScheduleAction.find(session[:schedule])
+    
+    @action.busy_room = Room.find(params[:room_id].to_i)
+    day = params[:date][0,2].to_i
+    month = params[:date][3,2].to_i
+    year = params[:date][6,4].to_i
+    @action.date = Date.new(year, month, day)
+    @weekday_string = @action.date.strftime("%A")
+    @action.busy_start = Time.mktime(0, 1, 1, params[:time]["start(4i)"], params[:time]["start(5i)"])
+    @action.busy_end = Time.mktime(0, 1, 1, params[:time]["end(4i)"], params[:time]["end(5i)"])
+    @action.flag = 1
+    @action.save
+    	  
+  end
+	
+	
 
 	def check
 	  $call_this_method = 0
@@ -402,30 +427,4 @@ class SchedulesController < ApplicationController
       end
     end
   end
-=begin
-	<% time = $TIMETABLESTART %>	
-	<% $TIMETABLEEND.times do %>
-		<tr>
-		<td><%= h time %>:00</td>
-		<% Room.find(:all).map(&:id).each do |r| %>
-			<% tmp = getForStartTimeAndRoom(time, 0, r) %>
-			<% if r == $busyRoomID && 
-				(time.to_i >= $busyStartH.to_i) &&
-				(time.to_i < $busyEndH.to_i || (time.to_i == $busyEndH.to_i && $busyEndM.to_i > 0)) %>
-				<% style = "style=\"background: red;\"" %>
-			<% elsif !tmp.nil? && tmp.key?(:changed) %>
-				<% style = "style=\"background: green;\"" %>
-			<% else %>
-				<% style = "" %>
-			<% end %>
-			<% if !tmp.nil? %>
-				<td <%= style %>><%= Course.find(tmp[:course]).name %></td>
-			<% else %>
-				<td <%= style %>>-</td>
-			<% end %>
-		<% end %> <!-- Raum-Schleife -->
-		</tr>
-		<% time += 1 %>
-	<% end %> <!-- Zeit-Schleife -->
-=end
 end

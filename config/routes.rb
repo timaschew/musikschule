@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.schedules '/schedules', :controller => 'schedules', :action => 'index'
+  
+  map.testing '/testing', :controller => 'testing', :action => 'index'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
