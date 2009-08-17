@@ -5,8 +5,8 @@ class CreateCourses < ActiveRecord::Migration
       t.integer :teacher_id
       t.integer :subject_id
       t.integer :room_id
-      t.time :start
-      t.time :duration
+      t.datetime :start
+      t.datetime :duration
       t.integer :weekday
       t.boolean :coursetype
       t.boolean :honorartype

@@ -25,8 +25,8 @@ class SchedulesController < ApplicationController
     year = params[:date][6,4].to_i
     @action.date = Date.new(year, month, day)
     @weekday_string = @action.date.strftime("%A")
-    @action.busy_start = Time.mktime(0, 1, 1, params[:time]["start(4i)"], params[:time]["start(5i)"]).utc
-    @action.busy_end = Time.mktime(0, 1, 1, params[:time]["end(4i)"], params[:time]["end(5i)"]).utc
+    @action.busy_start = Time.mktime(0, 1, 1, params[:time]["start(4i)"], params[:time]["start(5i)"])
+    @action.busy_end = Time.mktime(0, 1, 1, params[:time]["end(4i)"], params[:time]["end(5i)"])
     @action.flag = 1
     @action.save
     	  
@@ -115,8 +115,8 @@ class SchedulesController < ApplicationController
     		startMin = params[:time][""+cID.to_s+"_start(5i)"].to_i  # Anfangszeitpunkt der Belegung (Minute)
     		endHour = params[:time][""+cID.to_s+"_end(4i)"].to_i     # Endzeitpunkt der Belegung (Stunde)
     		endMin = params[:time][""+cID.to_s+"_end(5i)"].to_i      # Endzeitpunkt der Belegung (Minute)
-    		tmpHash[:limitStart] = Time.mktime(0, 1, 1, startHour+1, startMin).utc
-    		tmpHash[:limitEnd] = Time.mktime(0, 1, 1, endHour+1, endMin).utc
+    		tmpHash[:limitStart] = Time.mktime(0, 1, 1, startHour, startMin)
+    		tmpHash[:limitEnd] = Time.mktime(0, 1, 1, endHour, endMin)
   	    @scheduleHashCourses[i] = tmpHash # altes Array mit Kurs-IDs mit Hash überschreiben
   	  end
 	  
@@ -130,8 +130,8 @@ class SchedulesController < ApplicationController
   	    # als erstes im selben Raum prüfen
   	    courseRoom = Course.find(cID).room_id
   	    #logger.debug "getForCourse(#{cID})"
-        oldStartTime = getForCourse(cID)[:startTime].utc # original Time
-        oldEndTime = getForCourse(cID)[:endTime].utc # original Time
+        oldStartTime = getForCourse(cID)[:startTime] # original Time
+        oldEndTime = getForCourse(cID)[:endTime] # original Time
   	    limitUp = oldStartTime - hashmap[:limitStart] # Zeitdifferenz nach oben
   	    limitDown = hashmap[:limitEnd] - oldStartTime # Zeitdifferenz nach unten
   	    offset = 3600 # init (Stundenweise), alternativ 1800 oder 900 (halbe Stunde oder viertel Stunde)
@@ -221,8 +221,8 @@ class SchedulesController < ApplicationController
   			  else
   			    # Raum ist zu klein, aber merke es evtl für später
   			    $smallFreeRooms.push(Hash.[](
-  			    :start, Time.mktime(0, 1, 1, startDate.strftime("%H").to_i + 1, startDate.strftime("%M").to_i).utc, 
-  			    :end, Time.mktime(0, 1, 1, endDate.strftime("%H").to_i + 1, endDate.strftime("%M").to_i).utc, 
+  			    :start, Time.mktime(0, 1, 1, startDate.strftime("%H").to_i, startDate.strftime("%M").to_i), 
+  			    :end, Time.mktime(0, 1, 1, endDate.strftime("%H").to_i, endDate.strftime("%M").to_i), 
   			    :room, r))
   		    end
   		    
@@ -247,8 +247,8 @@ class SchedulesController < ApplicationController
 =end
   	def checkRoomAtOtherTime(courseID, room, startTime)
   	  # TODO: darf hier in der DB gesucht werden????? es müsste eigenltich in $timeTableList gesucht werden !
-  	  oldStart = Course.find(courseID).start.utc
-  	  oldEnd = Course.find(courseID).duration.utc
+  	  oldStart = Course.find(courseID).start
+  	  oldEnd = Course.find(courseID).duration
   	  duration = oldEnd - oldStart
   	  
   	  #room = Course.find(courseID).room_id
@@ -321,8 +321,8 @@ class SchedulesController < ApplicationController
 	    
 	    newStartTime = oldStartTime + offset
 	    newEndTime = oldEndTime + offset
-	    busyTimeStart = Time.mktime(0, 1, 1, $busyStartH.to_i + 1, $busyStartM.to_i).utc
-	    busyTimeEnd = Time.mktime(0, 1 , 1, $busyEndH.to_i + 1, $busyEndM.to_i).utc
+	    busyTimeStart = Time.mktime(0, 1, 1, $busyStartH.to_i, $busyStartM.to_i)
+	    busyTimeEnd = Time.mktime(0, 1 , 1, $busyEndH.to_i, $busyEndM.to_i)
 	    # den selben Raum nur prüfen, wenn es außerhalb des besetzten Zeitraums liegt
 	    if newStartTime.between?(busyTimeStart+1, busyTimeEnd-1) || newEndTime.between?(busyTimeStart+1, busyTimeEnd-1) # exklusiv hack
 	      logger.debug "\t Zeit liegt innerhalb der busyTime #{newStartTime.strftime("%H")}:#{newStartTime.strftime("%M")} - #{newEndTime.strftime("%H")}:#{newEndTime.strftime("%M")}"
@@ -378,8 +378,8 @@ class SchedulesController < ApplicationController
     entry = {}
     entry[:course] = courseID
     entry[:room] = roomID
-    entry[:startTime] = Time.mktime(0, 1, 1, (startHour.to_i + 1), startMin).utc
-    entry[:endTime] = Time.mktime(0, 1, 1, (endHour.to_i + 1), endMin).utc
+    entry[:startTime] = Time.mktime(0, 1, 1, (startHour.to_i), startMin)
+    entry[:endTime] = Time.mktime(0, 1, 1, (endHour.to_i), endMin)
     $timeTableList.push(entry)
   end
 

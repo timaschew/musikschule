@@ -10,7 +10,7 @@
 		  # Es wird für jede Stunde geprüft ob ein Kurs zum aktuellen Tag und dem aktuellen Raum existiert 
 		  # Wenn zwei oder mehr Kurse für die selbe Zeit eingetragen sind, erscheint eine Fehlermeldung %>
 		<%- @allRooms.each do |r| -%>
-			<%- courseNow = Course.find(:all, :conditions => "start like '#{time1}:#{time2}%' AND weekday = #{@weekday} AND room_id = #{r.id}") -%>
+			<%- courseNow = Course.find(:all, :conditions => "start like '%#{time1-1}:#{time2}%' AND weekday = #{@weekday} AND room_id = #{r.id}") -%>
 			<%- if courseNow.count > 1 -%>
 				<td class="timeTableCell"> <p class="warning">Überschneidung!</td>
 			<%- elsif !courseNow[0].nil? -%>

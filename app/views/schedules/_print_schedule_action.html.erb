@@ -1,0 +1,29 @@
+<p>
+	<b>ID:</b>
+	<%= @action.id %>
+</p>
+
+<p>
+	<b>Room:</b>
+	<%= @action.room.name + "(" + @action.room_id.to_s + ")" %>
+</p>
+
+<p>
+	<b>Date:</b>
+	<%= @action.date %>
+</p>
+
+<p>
+	<b>Busy Start:</b>
+	<%= @action.busy_start.strftime("%H:%M") %>
+</p>
+
+<p>
+	<b>Busy End:</b>
+	<%= @action.busy_end.strftime("%H:%M") %>
+</p>
+
+<p>
+	<b>Flag:</b>
+	<%= @action.flag %>
+</p>
