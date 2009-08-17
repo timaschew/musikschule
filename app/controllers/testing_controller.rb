@@ -29,5 +29,25 @@ class TestingController < ApplicationController
     end
   end
   
+  def test_time1
+    c = Course.new
+    zeit = Time.local(0,1,1,14,33)
+    c.start = zeit
+    c.save
+    
+    r = Course.last
+    time = r.start
+    render :text => "Zeit: #{time} war aber #{zeit}"
+    
+  end
+  
+  def test_time2
+
+    r = Course.first
+    time = r.start
+    render :text => "Zeit: #{time}"
+    
+  end
+  
   
 end

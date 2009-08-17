@@ -25,8 +25,8 @@ class SchedulesController < ApplicationController
     year = params[:date][6,4].to_i
     @action.date = Date.new(year, month, day)
     @weekday_string = @action.date.strftime("%A")
-    @action.busy_start = Time.mktime(0, 1, 1, params[:time]["start(4i)"], params[:time]["start(5i)"])
-    @action.busy_end = Time.mktime(0, 1, 1, params[:time]["end(4i)"], params[:time]["end(5i)"])
+    @action.busy_start = Time.mktime(0, 1, 1, params[:time]["start(4i)"], params[:time]["start(5i)"]).utc
+    @action.busy_end = Time.mktime(0, 1, 1, params[:time]["end(4i)"], params[:time]["end(5i)"]).utc
     @action.flag = 1
     @action.save
     	  

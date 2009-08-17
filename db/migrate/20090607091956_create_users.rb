@@ -5,9 +5,6 @@ class CreateUsers < ActiveRecord::Migration
       t.column :email,                     :string
       t.column :firstname,                :string
       t.column :lastname,                 :string
-      t.column :phone,                    :string
-      t.column :birthday,                 :date
-      t.column :comment,                  :text
       t.column :crypted_password,          :string, :limit => 40
       t.column :salt,                      :string, :limit => 40
       t.column :created_at,                :datetime
