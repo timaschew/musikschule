@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20090816104041) do
 
   create_table "schedule_actions", :force => true do |t|
     t.integer  "room_id"
-    t.time     "busy_start"
-    t.time     "busy_end"
+    t.datetime "busy_start"
+    t.datetime "busy_end"
     t.date     "date"
     t.integer  "flag",       :default => 0
     t.datetime "created_at"
@@ -82,7 +82,8 @@ ActiveRecord::Schema.define(:version => 20090816104041) do
     t.integer  "schedule_action_id",                :null => false
     t.integer  "course_id"
     t.integer  "room_id"
-    t.time     "time"
+    t.datetime "new_start"
+    t.datetime "new_end"
     t.integer  "flag",               :default => 0
     t.integer  "up_range",           :default => 0
     t.integer  "down_range",         :default => 0
@@ -91,8 +92,10 @@ ActiveRecord::Schema.define(:version => 20090816104041) do
   end
 
   create_table "small_rooms", :force => true do |t|
-    t.integer  "schedule_action_id"
-    t.integer  "room_id"
+    t.integer  "schedule_action_id", :null => false
+    t.integer  "room_id",            :null => false
+    t.datetime "start"
+    t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -117,14 +120,14 @@ ActiveRecord::Schema.define(:version => 20090816104041) do
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
+    t.string   "firstname"
+    t.string   "lastname"
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
-    t.string   "firstname"
-    t.string   "lastname"
   end
 
 end

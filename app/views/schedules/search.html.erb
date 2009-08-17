@@ -2,7 +2,12 @@
 
 <h2>Schedule Action</h2>
 
-<%= render :partial => "print_schedule_action" %>
+<%= render :partial => "schedule_action" unless @action.nil? %>
+
+
+<%= debug @clashed_courses unless @clashed_courses.nil? || @clashed_courses.empty? %>
+
+<%= debug @scheduling_1 unless @scheduling_1.nil? || @scheduling_1.empty? %>
 
 <br/><br/>
 <hr/>

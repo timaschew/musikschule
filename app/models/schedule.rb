@@ -3,15 +3,12 @@ class Schedule < ActiveRecord::Base
   belongs_to :course
   belongs_to :room
   
-  
-  # alias for time
-  def new_time
-    self.time
+  def start
+    self.new_start
   end
   
-  # alias for time = 
-  def new_time=(value)
-    self.time = value
+  def duration
+    self.new_end
   end
   
   # alias for room
@@ -22,6 +19,14 @@ class Schedule < ActiveRecord::Base
   # alias for room = 
   def new_room=(value)
     self.room = value
+  end
+  
+  def new_room_id
+    self.room_id
+  end
+  
+  def new_room_id=(value)
+    self.room_id = value
   end
   
 end

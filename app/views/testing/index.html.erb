@@ -5,7 +5,7 @@
 
 <hr/>
 <h2>Schedules</h2>
-<%= debug @schedules %>
+<%= render :partial => "schedules/schedules", :collection => @schedules, :as => :schedule unless (@schedules.nil? || @schedules.empty?) %>
 
 <hr/>
 <h2>Small Rooms</h2>

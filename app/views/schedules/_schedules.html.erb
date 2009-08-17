@@ -1,0 +1,49 @@
+<li>
+<ul>
+<li>
+	<b>Schedule ID:</b>
+	<%= schedule.id %>
+</li>
+
+<li>
+	<b>Course ID:</b>
+	<%= schedule.course.id.to_s + " (" + schedule.course.name + ")"%>
+</li>
+
+<li>
+	<b>Course Size:</b>
+	<%= Course.find(schedule.course.id).courselists.size %>
+</li>
+
+<li>
+	<b>Course Room:</b>
+	<%= schedule.room.name + " (" + schedule.room_id.to_s + ")" %>
+</li>
+
+<li>
+	<b>Start Time:</b>
+	<%= schedule.new_start.strftime("%H:%M") %>
+</li>
+
+<li>
+	<b>End Time:</b>
+	<%= schedule.new_end.strftime("%H:%M") %>
+</li>
+
+<li>
+	<b>Flag:</b>
+	<%= schedule.flag == -1 ? " > > > B A C K U P < < <" : schedule.flag %>
+</li>
+
+<li>
+	<b>Up Limit Range:</b>
+	<%= schedule.up_range -%>
+</li>
+
+<li>
+	<b>Down Limit Range:</b>
+	<%= schedule.down_range -%>
+</li>
+</ul>
+</li>
+<br/>

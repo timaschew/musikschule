@@ -26,9 +26,5 @@ class ApplicationController < ActionController::Base
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  
-  def pretty_time(value)
-    value.strftime("%H") + ":" + value.strftime("%M")
-  end
-  
+
 end

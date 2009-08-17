@@ -3,8 +3,8 @@ class CreateScheduleActions < ActiveRecord::Migration
     create_table :schedule_actions do |t|
       
       t.integer :room_id
-      t.time :busy_start
-      t.time :busy_end
+      t.datetime :busy_start
+      t.datetime :busy_end
       t.date :date
       t.integer :flag, :default => 0
       

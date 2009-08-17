@@ -1,0 +1,9 @@
+
+	<%= render :partial => "schedule_action" unless @action.nil? %>
+
+	<p>Schedules</p>
+	<ul>
+	<%= render :partial => "schedules", :collection => @schedules, :as => :schedule unless (@schedules.nil? || @schedules.empty?) %>
+	</ul>
+	
+	<%= debug @clashed_courses unless @clashed_courses.nil? || @clashed_courses.empty? %>

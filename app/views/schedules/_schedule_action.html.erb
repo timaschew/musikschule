@@ -1,16 +1,21 @@
 <p>
-	<b>ID:</b>
+	<b>ScheduleAction ID:</b>
 	<%= @action.id %>
 </p>
 
 <p>
 	<b>Room:</b>
-	<%= @action.room.name + "(" + @action.room_id.to_s + ")" %>
+	<%= @action.room.name + " (" + @action.room_id.to_s + ")" %>
 </p>
 
 <p>
 	<b>Date:</b>
 	<%= @action.date %>
+</p>
+
+<p>
+	<b>Weekday:</b>
+	<%= @action.date.wday %>
 </p>
 
 <p>
