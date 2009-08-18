@@ -5,11 +5,13 @@ class SchedulesController < ApplicationController
   ActiveRecord::Base.logger.level = 0 # warn
   
   # Schedule Flags
+  # -1 = could not scheduled
   # 0 = not initialized
   # 1 = initialized, not scheduled
   # 2 = scheduled, changed room
   # 3 = scheduled, changed time
-  # 4 = scheduled, recurisvly
+  # 4 = scheduled, changed time and room
+  # 5 = scheduled, recursivly
   
   # ATTENTION !!!
   # The Scheduler works only within one weekday, which is chosen by the user through the form
@@ -68,7 +70,7 @@ class SchedulesController < ApplicationController
   def check_free_room_at_same_time(course_id, action) 
     schedule_course = Schedule.find_by_schedule_action_id_and_course_id(action.id, course_id)
     size = Course.find(course_id).courselists.count
-  	free_room = false
+  	free_room_id = false
 	
   	all_rooms = Room.all(:order => :size).map(&:id)
   	all_rooms.each do |r_id|
@@ -76,33 +78,41 @@ class SchedulesController < ApplicationController
   	  if r_id == action.busy_room.id # skip busy_room
   	    next 
       end
-    
-      # check free room for the course (same/old time)
-      free_room = free_space(r_id, schedule_course.new_start, schedule_course.new_end)
       
-  		if free_room == true
+      # check free room for the course (same/old time) 
+  		if free_space(r_id, schedule_course.new_start, schedule_course.new_end) == true
   			# room is free at the time, the course keeps the original time, but room will be changed now
   			# check if the room has enough seats for course size
   			
   			if Room.find(r_id).size >= size
   			  # room has enough seats
-  			  free_room = r_id
+  			  free_room_id = r_id
   			  logger.debug ">>>>>>>>>>>> Raum: #{r_id} frei und Platz}"
   			  break
   		  else
   		    # room has not enough seats, but it could used for recursive scheduling, save the room ID
-  		    SmallRoom.create(
+  		    tmp = SmallRoom.new(
   		      :schedule_action_id => action.id,
   		      :room_id => r_id,
   		      :start => schedule_course.new_start,
   		      :end => schedule_course.new_end
   		    )
+  		    if SmallRoom.all(
+  		      :conditions => {
+  		        :schedule_action_id => tmp.schedule_action_id,
+  		        :room_id => tmp.room_id,
+  		        :start => tmp.start,
+  		        :end => tmp.end
+  		      }
+  		    ).count == 0
+  		      tmp.save
+		      end
   		    logger.debug ">>>>>>>>>>>> Raum: #{r_id} frei aber kein Platz}"
   	    end # size
 	    end # free_room
     end # all_rooms
     
-    free_room # return value
+    free_room_id # return value
   end
   	
   	
@@ -138,8 +148,7 @@ class SchedulesController < ApplicationController
     else
       
       @action = ScheduleAction.find(session[:schedule])
-      @schedules = @action.schedules
-      @clashed_courses = get_courses_to_schedule(@action)
+      @step_b_courses = schedule_step_a(@action.id)
       
     end
 	  
@@ -168,10 +177,22 @@ class SchedulesController < ApplicationController
     @action.flag = 1 # form values saved
     @action.save # save to DB
     
+    @step_b_courses = schedule_step_a(@action.id) # return a list with not scheduled course IDs
+    #@step_c_courses = schedule_step_b(@action.id, @step_b_courses) # return a list with not scheduled course IDs
+    
+  end
+  
+  def schedule_step_a(action_id)
+    @action = ScheduleAction.find(action_id)
+    
     # cleaning up old schedule objects in DB which associated with the actual action ID
     Schedule.find_all_by_schedule_action_id(@action.id).each do |s|
       s.destroy
     end
+    SmallRoom.find_all_by_schedule_action_id(@action.id).each do |sm|
+      sm.destroy
+    end
+    
     # get all courses at weekday and save it to @action.schedules
     # at this time they dont have to be scheduled, but its possible in the next steps
     get_courses_at_weekday(@action.date.wday)
@@ -180,19 +201,26 @@ class SchedulesController < ApplicationController
     
     # list with course IDs that collide with the busy_room and busy_time
     @clashed_courses = get_courses_to_schedule(@action)
+    step_b_courses = []
     
     # STEP 1 / A (scheduling room)
     @scheduling_1 = {}
     @clashed_courses.each do |course_id|
-      new_room = check_free_room_at_same_time(course_id, @action)
-      if new_room != false
-        @scheduling_1[course_id] = new_room
+      new_room_id = check_free_room_at_same_time(course_id, @action)
+      update = Schedule.find_by_schedule_action_id_and_course_id(@action.id, course_id)
+      if new_room_id != false
+        update.new_room_id = new_room_id
+        update.flag = 2
+        update.save
+        @scheduling_1[course_id] = new_room_id # only debug
       else
-        @scheduling_1[course_id] = false
+        update.flag = -1
+        update.save
+        step_b_courses.push(course_id)
+        @scheduling_1[course_id] = false # only debug
       end
     end
-    
-    
+    step_b_courses # return value
   end
 	
 	

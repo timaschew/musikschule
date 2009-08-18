@@ -1,0 +1,53 @@
+<%- bgcolor = {} -%>
+<%- bgcolor[:green] = " style=\"background-color: #{$TABLE_COLOR[7]}\" " -%>
+<%- bgcolor[:red] = " style=\"background-color: #{$TABLE_COLOR[0]}\" " -%>
+
+<%- time2 = 0 %> 
+<%- room_span = {} -%>
+<%- time1 = $TIMETABLESTART -%>
+<%- range = $TIMETABLEEND * 4 -%>	
+<%- range.times do -%>
+	<tr><%- until_time = ((time2 + 15) unless time2 == 45) || 0 -%>
+		<td><%= h time1 %>:<%= time2.to_i.zero? ? "00" : time2 %> - <%= h until_time == 0 ? (time1 + 1) : time1 %>:<%= until_time.to_i.zero? ? "00" : until_time %></td>
+		<%# loop for each weekday
+		  # check each room (r_id) and each time (tmp_time) for a course %>
+		<% Room.find(:all).map(&:id).each do |r_id| %>
+			<%- tmp_time = Time.mktime(0, 1, 1, time1, time2) #set time -%>
+			<%- schedule_course = get_for_start_time_and_room(tmp_time, r_id) #get schedule course or nil -%>	
+			
+			<%- if !schedule_course.nil? && schedule_course.flag > 0 -%>
+				<%# calculate rowspan for the room_id %>
+				<%- room_span[r_id] = ((schedule_course.new_end - schedule_course.new_start) / 900).to_i -%>
+				<%# show course, if its scheduled, mark green %>
+					<%- if schedule_course.flag > 1 -%>
+						<td <%= bgcolor[:green] %> class="timeTableCell" rowspan="<%= room_span[r_id] %>">
+					<%- else -%>
+						<td class="timeTableCell" rowspan="<%= room_span[r_id] %>">
+					<%- end -%>
+				<%= schedule_course.course.name_and_subject %>
+			<%- else -%>
+				<%# new table cell? %>
+				<%- if (room_span[r_id].to_i-1) <= 0 -%>
+					<%# check if its within the busy_time space %>
+					<%- if r_id == @action.busy_room.id && tmp_time.between?(@action.busy_start,@action.busy_end-1) -%>
+						<%# mark red %>
+						<td <%= bgcolor[:red] %> class="timeTableCell" rowspan="<%= room_span[r_id] %>">
+					<%- elsif -%>
+						<td class="timeTableCell" rowspan="<%= room_span[r_id] %>">
+					<%- end -%>
+				<%- else -%>
+					<%# no, no table cell, only decrement rowspan for the room_id %>
+					<%- room_span[r_id] -= 1 -%>
+				<%- end -%>
+			<%- end -%>
+			</td>
+		<%- end -%>
+	</tr>
+	<% time2 += 15%>
+	<% if time2 > 45 %>
+		<% time2 = 0 %>
+	<% end %>
+	<% if time2 == 0 %>
+		<% time1 += 1 %>
+	<% end %>
+<% end %>

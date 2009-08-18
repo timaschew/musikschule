@@ -6,4 +6,25 @@
 	<%= render :partial => "schedules", :collection => @schedules, :as => :schedule unless (@schedules.nil? || @schedules.empty?) %>
 	</ul>
 	
-	<%= debug @clashed_courses unless @clashed_courses.nil? || @clashed_courses.empty? %>
+	<p>clashed_courses</p>
+	<%= debug @clashed_courses %>
+
+	<p>scheduling_1</p>
+	<%= debug @scheduling_1 %>
+	
+	<p>step_b_courses</p>
+	<%= debug @step_b_courses %>
+	
+	
+	<div class="simpleBorder">
+	<table>
+		<tr>
+			<th>Zeit</th>
+			<% Room.find(:all).each do |r| %>
+				<th><%= r.name %></th>
+			<% end %>
+		</tr>
+		<%= render :partial => "room_table2" %> 
+	</table>
+	</div>
+	
