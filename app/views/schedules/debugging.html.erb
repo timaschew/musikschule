@@ -15,13 +15,20 @@
 
 <%- if @id == 2 %>
 
-		<p>Updatet B Step Schedules</p>
+		<p>Step B Schedule Courses</p>
 		<ul>
-		<%= render :partial => "schedules", :collection => @updated_b_courses, :as => :schedule unless (@updated_b_courses.nil? || @updated_b_courses.empty?) %>
+		<%= render :partial => "schedules", :collection => @step_b_courses, :as => :schedule unless (@step_b_courses.nil? || @step_b_courses.empty?) %>
 		</ul>
 		
-		<p>step_c_courses</p>
-		<%= debug @step_c_courses.map(&:course_id) %>
+
+<%- end -%>
+
+<%- if @id == 3 %>
+
+		<p>Step C Schedule Courses</p>
+		<ul>
+		<%= render :partial => "schedules", :collection => @step_c_courses, :as => :schedule unless (@step_c_courses.nil? || @step_c_courses.empty?) %>
+		</ul>
 
 <%- end -%>
 	

@@ -27,6 +27,8 @@
 						<td <%= bgcolor[:green] %> class="timeTableCell" rowspan="<%= room_span[r_id] %>">
 					<%- elsif schedule_course.flag == 3 -%>
 						<td <%= bgcolor[:darkgreen] %> class="timeTableCell" rowspan="<%= room_span[r_id] %>">
+					<%- elsif schedule_course.flag == 4 -%>
+						<td <%= bgcolor[:turquoise] %> class="timeTableCell" rowspan="<%= room_span[r_id] %>">
 					<%- else -%>
 						<td class="timeTableCell" rowspan="<%= room_span[r_id] %>">
 					<%- end -%>

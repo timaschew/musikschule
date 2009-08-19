@@ -31,11 +31,11 @@ Kurse:
 	</p>
 	<p>
 	<%= label :time_start, "Begin:" %>
-	<%= time_select "time", c_id.to_s+"_start", {:minute_step => 15} %>
+	<%= time_select "time", c_id.to_s+"_start", {:minute_step => 15, :default => Course.find(c_id).start } %>
 	<p>
 	<p>
 	<%= label :time_end, "Ende:" %>
-	<%= time_select "time", c_id.to_s+"_end", {:minute_step => 15} %>
+	<%= time_select "time", c_id.to_s+"_end", {:minute_step => 15, :default => Course.find(c_id).duration } %>
 	<p>
 <% end %>
 <p>

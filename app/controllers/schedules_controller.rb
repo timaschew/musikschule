@@ -6,9 +6,8 @@ class SchedulesController < ApplicationController
   
   # Schedule Flags
   #-1 = not scheduled in step A
-  #-2 = not scheduled in step B
-  #-3 = not scheduled in step C
-  #-4 = not scheduled in step D, no way to schedule it
+  #-2 = not scheduled in step B and C
+  #-3 = not scheduled in step D, no way to schedule it
   # 0 = not initialized
   # 1 = initialized, not scheduled
   # 2 = scheduled, changed room
@@ -37,8 +36,7 @@ class SchedulesController < ApplicationController
       @action = ScheduleAction.find(session[:schedule])
       @schedules = @action.schedules
       
-      @step_b_courses = Schedule.find_all_by_flag(-2)
-      @updated_b_courses = @step_b_courses
+      @step_b_courses = Schedule.find_all_by_flag(-1)
       
       @step_c_courses = Schedule.find_all_by_flag(-2)
       
@@ -277,9 +275,16 @@ return true room_id if a room is found, otherwise false
   	room_has_courses = tmp_courses_1 | tmp_courses_2
   	room_has_courses.empty?
   end
+  
+# return true, if room is free between new_start and new_end and the room has enough seats
+  def free_space_and_enough_seats(r_id, new_start, new_end, course_size)
+  	tmp = free_space(r_id, new_start, new_end)
+  	tmp && (Room.find(r_id).size >= course_size) # return value
+  end
 
   def check_new_time_with_range(offset, schedule_course)
     course = schedule_course.course
+    flag = schedule_course.flag 
     @action = ScheduleAction.find(session[:schedule])
     step = offset
     #limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
@@ -287,7 +292,7 @@ return true room_id if a room is found, otherwise false
     range_up = (schedule_course.up_range / offset).to_i
     range_down = (schedule_course.down_range / offset).to_i
     range = range_up > range_down ? range_up : range_down # max. Range
-     logger.debug "+++++++++++++++++++++"
+    logger.debug "+++++++++++++++++++++"
     logger.debug "suche neue Zeit für Kurs #{course.id}: #{course.name} beginnt noch um #{schedule_course.start.strftime("%H:%M")}"
     logger.debug "range_up = #{range_up} ; range_down = #{range_down} ; range = #{range}"
     double_range = 2 * range
@@ -313,28 +318,46 @@ return true room_id if a room is found, otherwise false
       # den selben Raum nur prüfen, wenn es außerhalb des besetzten Zeitraums liegt
       if new_start_time.between?(@action.busy_start, @action.busy_end-1) || new_end_time.between?(@action.busy_start+1, @action.busy_end)
         logger.debug "\t Zeit liegt innerhalb der busyTime #{new_start_time.strftime("%H:%M")}- #{new_end_time.strftime("%H:%M")}"
-        schedule_course.flag = -2
-        schedule_course.save
+        
       else
   	    logger.debug "\t Zeit liegt außerhalb #{new_start_time.strftime("%H:%M")}- #{new_end_time.strftime("%H:%M")}"
   	    result = free_space(schedule_course.room.id, new_start_time, new_end_time)
   	    if result == true
   	      schedule_course.start = new_start_time
   	      schedule_course.stop = new_end_time
-  	      schedule_course.flag = 3
-  	      schedule_course.save
+  	      flag = 3
   	      logger.debug "\t \t Kurs wird nun verschoben werden nach: #{new_start_time.strftime("%H:%M")}"
   	      break
         else 
-          # step C loop over all rooms
-          schedule_course.flag = -2
-          schedule_course.save
           logger.debug "\t \t Zeit besetzt"
+          flag = -2
         end
 
         #logger.debug "Zeit ist frei: #{result.nil? ? false.to_s : true.to_s}"
-
       end
+      
+      # Schedule Step 3 (other rooms)
+      inner_breaks =  false
+      Room.all(:conditions => ["id != ?", @action.busy_room.id]).map(&:id).each do |r_id|
+        result_2 = free_space_and_enough_seats(r_id, new_start_time, new_end_time, schedule_course.course.courselists.count)
+        if result_2 == true
+  	      schedule_course.start = new_start_time
+  	      schedule_course.stop = new_end_time
+  	      schedule_course.new_room_id = r_id
+  	      flag = 3
+  	      logger.debug "\t \t INNER: Kurs wird nun verschoben werden nach: #{new_start_time.strftime("%H:%M")} Raum: #{r_id}"
+  	      inner_breaks = true
+  	      break
+	      else
+	        logger.debug "\t \t INNER: Zeit besetzt"
+  	      flag = -2
+	      end
+      end # room loop
+      if inner_breaks == true
+        break
+      end
+      
+      
       logger.debug "------------"
       # Offset für nächste Iteratino anpassen
       if i % 2 == 0
@@ -343,9 +366,14 @@ return true room_id if a room is found, otherwise false
         offset *= -1 # alternating: @ 1,3,5,7, ...
         offset += step
       end
+      
+      
     end # double_range.times Loop
+    logger.debug "\t \t gar keine Zeit gefunden, flag = -2"
+    schedule_course.flag = flag # set flag: -2 not scheduled; 3 scheduled and changed time
+    schedule_course.save # save flag 
 
-  end
+  end 
   
   
 end
