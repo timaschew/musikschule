@@ -7,8 +7,16 @@ class Schedule < ActiveRecord::Base
     self.new_start
   end
   
-  def duration
+  def start=(value)
+    self.new_start = value
+  end
+  
+  def stop
     self.new_end
+  end
+  
+  def stop=(value)
+    self.new_end = value
   end
   
   # alias for room

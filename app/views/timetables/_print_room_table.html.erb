@@ -15,15 +15,14 @@
 				<td class="timeTableCell"> <p class="warning">Überschneidung!</td>
 			<%- elsif !courseNow[0].nil? -%>
 				<%- room_span[r.id] = ((courseNow[0].duration - courseNow[0].start) / 900).to_i -%>
-				<%- logger.debug ">>>> Tag #{r.id} >>> Zeit #{time1}:#{time2} >>> #{room_span[r.id]}" -%>
 				<td class="timeTableCell" rowspan="<%= room_span[r.id] %>">
-				<%= link_to courseNow[0].name_and_subject, courseNow[0] %>
+				<%= link_to courseNow[0].name, courseNow[0] %>
 			<%- else -%>
 				<%- if (room_span[r.id].to_i-1) <= 0 -%>
 					<td class="timeTableCell"></td>
 				<%- else -%>
 					<%- room_span[r.id] -= 1 -%>
-					<%- logger.debug ">>>> Tag #{r.id} >>> Zeit #{time1}:#{time2} > -- #{room_span[r.id]}" -%>
+
 				<%- end -%>
 				</td>
 			<%- end -%>

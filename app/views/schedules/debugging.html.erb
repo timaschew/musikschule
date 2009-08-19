@@ -1,20 +1,29 @@
 
-	<%= render :partial => "schedule_action" unless @action.nil? %>
+<%= render :partial => "schedule_action" unless @action.nil? %>
+
+<%- if @id == 1 %>
 
 	<p>Schedules</p>
 	<ul>
 	<%= render :partial => "schedules", :collection => @schedules, :as => :schedule unless (@schedules.nil? || @schedules.empty?) %>
 	</ul>
 	
-	<p>clashed_courses</p>
-	<%= debug @clashed_courses %>
-
-	<p>scheduling_1</p>
-	<%= debug @scheduling_1 %>
-	
 	<p>step_b_courses</p>
-	<%= debug @step_b_courses %>
+	<%= debug @step_b_courses.map(&:course_id) %>
 	
+<%- end -%>	
+
+<%- if @id == 2 %>
+
+		<p>Updatet B Step Schedules</p>
+		<ul>
+		<%= render :partial => "schedules", :collection => @updated_b_courses, :as => :schedule unless (@updated_b_courses.nil? || @updated_b_courses.empty?) %>
+		</ul>
+		
+		<p>step_c_courses</p>
+		<%= debug @step_c_courses.map(&:course_id) %>
+
+<%- end -%>
 	
 	<div class="simpleBorder">
 	<table>
@@ -24,7 +33,8 @@
 				<th><%= r.name %></th>
 			<% end %>
 		</tr>
-		<%= render :partial => "room_table2" %> 
+		<%= render :partial => "room_table" %> 
 	</table>
 	</div>
-	
+
+

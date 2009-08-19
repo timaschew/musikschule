@@ -1,37 +1,41 @@
 <h1>Zeit-Grenze einstellen</h1>
 <h2>Für die folgenden Kurse konnte kein Ersatzraum zur gleichen Zeit gefunden werden</h2>
 <h3>Bitte wählen sie einen neuen maximalen Zeitraum für den jeweiligen Kurs aus</h3>
+
+<h2>Achtung: Diese Seite darf nicht im Browser über die "Zurück"-Schaltfläche angesteuert werden</h2>
+<h2>Falls doch, muss sicher gestellt werden, dass die Seite dann aktualisiert wird (F5) und die Formulardaten der vorherigen Seite nochmal gesendet werden</h2>
+
 Kurse:
 <ul>
-<% $scheduleBCourses.each do |cID| %>
-	<% course = Course.find(cID) %>
+<% @step_b_courses.each do |c_id| %>
+	<% course = Course.find(c_id) %>
 	<!-- Bsp.-Ausgabe: (1) Gitarrenunterricht von 12:00 bis 13:00 bei Johannes Schmidt -->
-	<li><%= "(" + cID.to_s + ") " +
+	<li><%= "(" + c_id.to_s + ") " +
 				course.name + " von " +
-				course.start.strftime("%H") + ":" + course.start.strftime("%M") + " bis " +
-				course.duration.strftime("%H") + ":" + course.duration.strftime("%M") + " bei " +
-				Teacher.find(course.teacher_id).firstname + " " + Teacher.find(course.teacher_id).lastname %>
+				course.start.strftime("%H:%M bis ") +
+				course.duration.strftime("%H:%M") + " bei " +
+				course.teacher.get_name %>
 	</li>
 <% end %>
 
 </ul>
 
 
-<% form_tag :action => "continueChecking" do %>
+<% form_tag :action => "schedule_step_b" do %>
 
-<% $scheduleBCourses.each do |cID| %>
+<% @step_b_courses.each do |c_id| %>
 	<% timeLimits = [] %>
 	<p>
-	<%= label :courseID, "ID: " + cID.to_s %>
-	<%= hidden_field_tag("courseID[]", cID) %>
+	<%= label :course_id, "ID: " + c_id.to_s %>
+	<%= hidden_field_tag("courses[]", c_id) %>
 	</p>
 	<p>
 	<%= label :time_start, "Begin:" %>
-	<%= time_select "time", cID.to_s+"_start", {:minute_step => 15} %>
+	<%= time_select "time", c_id.to_s+"_start", {:minute_step => 15} %>
 	<p>
 	<p>
 	<%= label :time_end, "Ende:" %>
-	<%= time_select "time", cID.to_s+"_end", {:minute_step => 15} %>
+	<%= time_select "time", c_id.to_s+"_end", {:minute_step => 15} %>
 	<p>
 <% end %>
 <p>
@@ -40,4 +44,4 @@ Kurse:
 <% end %>
 
 
-<%= $scheduleBCourses.inspect %>
+<%= @step_b_courses.inspect %>
