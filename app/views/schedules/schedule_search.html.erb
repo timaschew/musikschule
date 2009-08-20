@@ -1,16 +1,51 @@
+<script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+	<script src="/javascripts/jquery.js" type="text/javascript"></script>
+	<script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
+	<script src="/javascripts/jrails.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	     $(document).ready(function(){
+			$(".ccs").hide();
+			$(".s1s").hide();
+		    $("button").click(function () {
+			var meilenstein = $(this).attr("class");
+		      $("."+meilenstein+"s").slideToggle("slow");
+		    });
+		  });
+	</script>
+
 <h1>Search</h1>
 
 <h2>Schedule Action</h2>
 
 <%= render :partial => "schedule_action" unless @action.nil? %>
 
-<p>clashed_courses</p>
-<%= debug @clashed_courses unless @clashed_courses.nil? || @clashed_courses.empty? %>
+<button class="cc">@clashed_courses</button><br/>
+<div class="ccs">
+<%= debug @clashed_courses %>
+</div>
+<br/><br/>
 
-<p>scheduling_1</p>
-<%= debug @scheduling_1 unless @scheduling_1.nil? || @scheduling_1.empty? %>
+
+<button class="c1">@scheduling_1</button><br/>
+<div class="c1s">
+<%= debug @scheduling_1 %>
+</div>
+<br/><br/>
+
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% Room.find(:all).each do |r| %>
+			<th><%= r.name %></th>
+		<% end %>
+	</tr>
+	<%= render :partial => "room_table" %> 
+</table>
 
 <br/><br/>
-<hr/>
-<br/><br/>
-<%= debug @action -%>
+
+<%= render :partial => "show_colors" %> 
+
+</div>

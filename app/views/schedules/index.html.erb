@@ -4,7 +4,8 @@
 
 <p>
 <%= label :room_id, "Raum" %>
-<%= select_tag(:room_id, options_from_collection_for_select(@rooms, :id, :name), :room_id => 3) %>
+<%# select_tag(:room_id, options_from_collection_for_select(@rooms, :id, :name), {:value => 3}) %>
+<%= collection_select(:room, :id, Room.all, :id, :name_and_id, {:selected => 3}) %>
 </p>
 <p>
 <%= label :date, "Datum:" %>
@@ -13,11 +14,11 @@
 <div style="clear: both;"></div>
 <p>
 <%= label :time_start, "Begin:" %>
-<%= time_select "time", "start", {:minute_step => 15} %>
+<%= time_select "time", "start", :default => {:hour => 13, :minute => 00}, :minute_step => 15 %>
 <p>
 <p>
 <%= label :time_end, "Ende:" %>
-<%= time_select "time", "end", {:minute_step => 15} %>
+<%= time_select "time", "end", :default => {:hour => 17, :minute => 00}, :minute_step => 15 %>
 <p>
 
 <p>
@@ -28,7 +29,6 @@
 
 <p>Zum Testen: <br/><br/>
 	Raum: drei<br/>
-	Tag ein Montag (per default schon eingestellt)<br/>
-	- einfache Variante: Beginn: &gt;= 15:00 Uhr<br/>
-	- weitere Variante: Beginn: &lt;= 14:45 Uhr<br/>
+	Beginn: 13:00<br/>
+	Ende 17:00<br/><br/>
 </p>

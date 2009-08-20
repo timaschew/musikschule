@@ -1,0 +1,11 @@
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% Room.find(:all).each do |r| %>
+			<th><%= r.name %></th>
+		<% end %>
+	</tr>
+	<%= render :partial => "room_table" %> 
+</table>
+</div>

@@ -6,14 +6,14 @@ class SchedulesController < ApplicationController
   
   # Schedule Flags
   #-1 = not scheduled in step A
-  #-2 = not scheduled in step B and C
-  #-3 = not scheduled in step D, no way to schedule it
+  #-2 = not scheduled in step B and B1
+  #-3 = not scheduled in step C, no way to schedule it
   # 0 = not initialized
   # 1 = initialized, not scheduled
-  # 2 = scheduled, changed room
-  # 3 = scheduled, changed time
-  # 4 = scheduled, changed time and room
-  # 5 = scheduled, recursivly
+  # 2 = scheduled, changed room A 
+  # 3 = scheduled, changed time B
+  # 4 = scheduled, changed time and room B1
+  # 5 = scheduled, recursivly C
   
   # ATTENTION !!!
   # The Scheduler works only within one weekday, which is chosen by the user through the form
@@ -36,9 +36,9 @@ class SchedulesController < ApplicationController
       @action = ScheduleAction.find(session[:schedule])
       @schedules = @action.schedules
       
-      @step_b_courses = Schedule.find_all_by_flag(-1)
+      @step_b_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -1)
       
-      @step_c_courses = Schedule.find_all_by_flag(-2)
+      @step_c_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -2)
       
       
     end
@@ -58,7 +58,7 @@ class SchedulesController < ApplicationController
     # get the action from DB
     @action = ScheduleAction.find(session[:schedule])
     # and save the user data from the form
-    @action.busy_room = Room.find(params[:room_id].to_i)
+    @action.busy_room = Room.find(params[:room][:id].to_i)
     day = params[:date][0,2].to_i
     month = params[:date][3,2].to_i
     year = params[:date][6,4].to_i
@@ -128,7 +128,7 @@ class SchedulesController < ApplicationController
     @step_b_courses = []
     
     
-    # @step_b_courses = Schedule.find_all_by_flag(-1).map(&:course_id) # alternativ
+    # @step_b_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -1).map(&:course_id) # alternativ
     params[:courses].each {|id| @step_b_courses.push id.to_i } # cast from string to integer
     
     @step_b_courses.each do |c_id|
@@ -145,18 +145,97 @@ class SchedulesController < ApplicationController
       schedule_course.save
     end
     
-    @updated_b_courses = Schedule.find_all_by_flag(-1)
+    @updated_b_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -1)
     
     @updated_b_courses.each do |schedule_course|
       offset = 3600 # step and offset
       check_new_time_with_range(offset, schedule_course)
     end
      
-     @step_c_courses = Schedule.find_all_by_flag(-2)
+     @step_c_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -2)
+
+     schedule_step_c
+    
+  end
+  
+  
+  def schedule_step_c
+    
+    @action = ScheduleAction.find(session[:schedule])
+    schedule_courses = Schedule.find_all_by_schedule_action_id_and_flag(@action.id, -2)
+    
+    schedule_courses.each do |s|
+      possible_room_ids = Room.find_all_by_size(s.course.size..99).map(&:id)
+      small_room_ids = SmallRoom.find_all_by_schedule_action_id(@action.id).map(&:room_id).uniq
+      
+      rekursive_scheduler(small_room_ids, s.id, possible_room_ids, s.start, s.stop)
+    end
     
   end
   
   private 
+  
+  
+  # 
+  def rekursive_scheduler(small_room_ids, g_schedule_id, g_possible_room_ids, g_start_time, g_end_time)
+    
+    small_room_ids.each do |r_id|
+      # TODO: Optimierungsmöglichkeit: gleich danach suchen, dass die Course.size nicht größer als die Raum.size ist
+      rekursive_courses = Schedule.all(
+        :conditions => [
+          "id != :c_id
+          AND
+          flag != 5
+          AND
+          (new_start <= :start AND new_end >= :stop)",
+          {:start => g_start_time, :stop => g_end_time, :c_id => g_schedule_id}
+        ]
+      )
+      
+      rekursive_courses.each do |s|
+        tmp = free_space_and_enough_seats(r_id, s.start, s.stop, s.course.size)
+        if tmp == true # course can move to the small room, old course room is now free
+          
+          free_room_id = s.room_id
+          s.new_room_id = r_id
+          s.flag = 5
+          s.save
+          
+          # g_possible_room_list contains free_room_id ?
+          if g_possible_room_ids.detect {|x| x == free_room_id} == free_room_id 
+            update = Schedule.find(g_schedule_id)
+            update.new_room_id = free_room_id
+            update.flag = 6
+            update.save
+            
+            # return free_room_id
+            
+          else
+            # call method recursvly with new data
+            
+            # update small_room_ids 
+            small_room_ids.delete(r_id)
+            small_room_ids.push(free_room_id)
+            
+            rekursive_scheduler(small_room_ids, g_possible_room_ids, g_course_id, g_start_time, g_end_time)
+            
+            
+          end
+          
+        else
+          
+          # next course
+          
+        end # course loop
+        
+        # next small room
+        
+      end # room loop
+      
+    end # method
+    
+    
+  end
   
 =begin
 Search all courses at the chosen weekday by the user
@@ -171,7 +250,7 @@ Search all courses at the chosen weekday by the user
         :new_room_id => c.room.id, # original room id
         :new_start => c.start, # original start time
         :new_end => c.duration, # original end time
-        :flag => 1
+        :flag => 1 # initialized
       )
 
       # backup original
@@ -284,7 +363,7 @@ return true room_id if a room is found, otherwise false
 
   def check_new_time_with_range(offset, schedule_course)
     course = schedule_course.course
-    flag = schedule_course.flag 
+    flag = -2
     @action = ScheduleAction.find(session[:schedule])
     step = offset
     #limit = 3 # Limit (immer in Stunden, 0,5 = halbe Stunde, 0.25 = viertel Stunde)
@@ -339,12 +418,12 @@ return true room_id if a room is found, otherwise false
       # Schedule Step 3 (other rooms)
       inner_breaks =  false
       Room.all(:conditions => ["id != ?", @action.busy_room.id]).map(&:id).each do |r_id|
-        result_2 = free_space_and_enough_seats(r_id, new_start_time, new_end_time, schedule_course.course.courselists.count)
+        result_2 = free_space_and_enough_seats(r_id, new_start_time, new_end_time, schedule_course.course.size)
         if result_2 == true
   	      schedule_course.start = new_start_time
   	      schedule_course.stop = new_end_time
   	      schedule_course.new_room_id = r_id
-  	      flag = 3
+  	      flag = 4
   	      logger.debug "\t \t INNER: Kurs wird nun verschoben werden nach: #{new_start_time.strftime("%H:%M")} Raum: #{r_id}"
   	      inner_breaks = true
   	      break

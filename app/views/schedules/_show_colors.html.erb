@@ -1,0 +1,33 @@
+<%- bgcolor = {} -%>
+<%- bgcolor[:green] = " style=\"background-color: #{$TABLE_COLOR[7]}\" " -%>
+<%- bgcolor[:darkgreen] = " style=\"background-color: #{$TABLE_COLOR[2]}\" " -%>
+<%- bgcolor[:turquoise] = " style=\"background-color: #{$TABLE_COLOR[8]}\" " -%>
+<%- bgcolor[:blue] = " style=\"background-color: #{$TABLE_COLOR[3]}\" " -%>
+<%- bgcolor[:darkblue] = " style=\"background-color: #{$TABLE_COLOR[9]}\" " -%>
+<%- bgcolor[:red] = " style=\"background-color: #{$TABLE_COLOR[0]}\" " -%>
+
+
+<table>
+	<tr>
+		<th>Bedeutung</th>
+		<th>belegt</th>
+		<th>räumlich</th>
+		<th>zeitlich</th>
+		<th>räumlich + zeitlich</th>
+		<th>rekursiv indirekt *</th>
+		<th>rekursiv direkt **</th>
+	</tr>
+	<tr>
+		<th>Farbe</th>
+		<td <%= bgcolor[:red] %>></td>
+		<td <%= bgcolor[:green] %>></td>
+		<td <%= bgcolor[:darkgreen] %>></td>
+		<td <%= bgcolor[:turquoise] %>></td>
+		<td <%= bgcolor[:blue] %>></td>
+		<td <%= bgcolor[:darkblue] %>></td>
+	</tr>
+</table>
+
+<p>
+	<strong>*</strong>Der direkte Kurs* soll eigentlich verschoben werden. Um den eigentlich Kurs* zu verschieben, müssen aber, erstmal andere Kurse* verschoben werden
+</p>

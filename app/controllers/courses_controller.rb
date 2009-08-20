@@ -24,6 +24,16 @@ class CoursesController < ApplicationController
   # GET /courses/new
   # GET /courses/new.xml
   def new
+    
+    @hour = 14
+    @min = 0
+    @weekday = 1
+    @room = 1
+    @hour = params[:time][0,2] unless params[:time].blank?
+    @min = params[:time][2,2] unless params[:time].blank?
+    @weekday = params[:day].to_i unless params[:day].blank?
+    @room = params[:room].to_i unless params[:room].blank?
+    
     @course = Course.new
 
     respond_to do |format|

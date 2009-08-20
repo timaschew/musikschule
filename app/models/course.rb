@@ -13,4 +13,8 @@ class Course < ActiveRecord::Base
     subject.name + " bei " + teacher.get_name + " um " + start.strftime("%H") + ":" +start.strftime("%M") + " bis " + duration.strftime("%H") + ":" + duration.strftime("%M")
   end
   
+  def size
+    self.courselists.count
+  end
+  
 end

@@ -1,8 +1,44 @@
-<p>@updated_b_courses (up_range / down_range)
+<script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+	<script src="/javascripts/jquery.js" type="text/javascript"></script>
+	<script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
+	<script src="/javascripts/jrails.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	     $(document).ready(function(){
+			$(".up_bs").hide();
+			$(".up_cs").hide();
+		    $("button").click(function () {
+			var meilenstein = $(this).attr("class");
+		      $("."+meilenstein+"s").slideToggle("slow");
+		    });
+		  });
+	</script>
+
+<button class="up_b">@updated_b_courses (up_range / down_range)</button><br/>
+<div class="up_bs">
 <%= debug @updated_b_courses %>
+</div>
 <br/><br/>
 
-<p>@step_c_courses</p>
+<button class="up_c">@step_c_courses</button><br/>
+<div class="up_cs">
 <%= debug @step_c_courses %>
+</div>
+<br/><br/>
 
+<div class="simpleBorder">
+<table>
+	<tr>
+		<th>Zeit</th>
+		<% Room.find(:all).each do |r| %>
+			<th><%= r.name %></th>
+		<% end %>
+	</tr>
+	<%= render :partial => "room_table" %> 
+</table>
 
+<br/><br/>
+
+<%= render :partial => "show_colors" %> 
+
+</div>

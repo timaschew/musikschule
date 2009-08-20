@@ -9,15 +9,34 @@
   </p>
   <p>
     <%= f.label :start %><br />
-    <%= f.time_select :start, {:minute_step => 15} %> Uhr
+    <%= f.time_select :start, :default => { :year => 2000, :month => 1, :day => 1, :hour => @hour, :minute => @min }, :minute_step => 15 %> Uhr
   </p>
   <p>
     <%= f.label :Ende %><br />
-    <%= f.time_select :duration, {:minute_step => 15} %> Uhr
+    <%= f.time_select :duration, :default => { :year => 2000, :month => 1, :day => 1, :hour => @hour.to_i+1, :minute => @min }, :minute_step => 15 %> Uhr
   </p>
   <p>
-    <%= f.label :Wochentag %><br /><small>1 = Montag, ..., 5 = Freitag</small><br />
-    <%= f.text_field :weekday %>
+	<%= label :subject_id, "Unterricht:" %>
+	<%= collection_select(:course, :subject_id, Subject.all, :id, :name) %>
+  </p>
+  <p>
+	<%= label :teacher_id, "Lehrer:" %>
+	<%= collection_select(:course, :teacher_id, Teacher.all, :id, :get_name) %>
+  </p>
+  <p>
+	<%= label :room_id, "Raum:" %>
+	<%= collection_select(:course, :room_id, Room.all, :id, :name_and_id, {:selected => @room}) %>
+  </p>
+  <p>
+    <%= f.label :Wochentag %><br />
+    <%# f.text_field :weekday %>
+	<%= select(:course, :weekday, [["Montag", 1], 
+									["Dienstag", 2], 
+									["Mitwoch", 3], 
+									["Donnerstag", 4], 
+									["Freitag", 5]],  
+									{:selected => @weekday, :order => :id } ) %>
+	
   </p>
   <p>
     <%= f.label :Einzelunterricht %><br />

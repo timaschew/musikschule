@@ -24,6 +24,11 @@ td {
 	
 }
 
+.newCourse {
+	display:block;
+	text-decoration: none;
+}
+
 .t20 {
 	font-size: 20px;
 }
