@@ -2,7 +2,19 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.xml
   def index
-    @courses = Course.find(:all, :order => "weekday, teacher_id, start")
+    
+    sorting = Hash.new("weekday, teacher_id, start") # standard
+    sorting["id"] = "id"
+    sorting["teacher"] = "teacher_id, weekday, start"
+    sorting["day"] = "weekday, start, teacher_id"
+    sorting["subject"] = "subject_id, weekday, start"
+    sorting["room"] = "room_id, weekday, start"
+    sorting["start"] = "start, weekday"
+    sorting["stop"] = "duration, weekday"
+    sorting["name"] = "name"
+     
+    @courses = Course.find(:all, :order => sorting[params[:sort]])
+
 
     respond_to do |format|
       format.html # index.html.erb

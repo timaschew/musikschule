@@ -4,9 +4,10 @@
 <br/><br/>
 <table>
   <tr>
-	<th>Lehrer</th>
+	<th><%= link_to 'Lehrer', courses_path(:sort => :teacher) %></th>
 	<th>Raum</th>
 	<th>Fach</th>
+	<th>Name</th>
     <th>Start</th>
     <th>Ende</th>
     <th>Wochentag</th>
@@ -21,6 +22,7 @@
 	<td><%=h course.teacher.get_name %></td>
 	<td><%=h course.room.name %></td>
 	<td><%=h course.subject.name %></td>
+	<td><%=h course.name %></td>
     <td><%=h course.start.strftime("%H:%M") %></td>
     <td><%=h course.duration.strftime("%H:%M") %></td>
     <td><%=h Time.mktime(0,5,course.weekday).strftime("%A") %></td>

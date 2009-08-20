@@ -11,15 +11,15 @@
 		  # Es wird für jede Stunde geprüft ob ein Kurs zum aktuellen Tag und dem aktuellen Raum existiert 
 		  # Wenn zwei oder mehr Kurse für die selbe Zeit eingetragen sind, erscheint eine Fehlermeldung %>
 		<%- @allRooms.each do |r| -%>
-			
-			<%- courseNow = Course.find(:all, :conditions => "start like '%#{time1-1}:#{time2_real}%' AND weekday = #{@weekday} AND room_id = #{r.id}") -%>
+			<%- course_now = Course.find_all_by_start_and_weekday_and_room_id(Time.mktime(0,1,1,time1,time2).utc, @weekday, r.id)%>
+			<%# course_now = Course.find(:all, :conditions => "start like '%#{time1-1}:#{time2_real}%' AND weekday = #{@weekday} AND room_id = #{r.id}") -%>
 			<!--  <%= "+++++++++++++++++ RAUM " + r.name + "( time1,time2_real,weekday => " + (time1-1).to_s + " " + time2_real.to_s + " " + @weekday.to_s + " )" %>  -->
-			<%- if courseNow.count > 1 -%>
+			<%- if course_now.count > 1 -%>
 				<td class="timeTableCell"> <p class="warning">Überschneidung!</td>
-			<%- elsif !courseNow[0].nil? -%>
-				<%- room_span[r.id] = ((courseNow[0].duration - courseNow[0].start) / 900).to_i -%>
+			<%- elsif !course_now[0].nil? -%>
+				<%- room_span[r.id] = ((course_now[0].duration - course_now[0].start) / 900).to_i -%>
 				<td class="timeTableCell" rowspan="<%= room_span[r.id] %>">
-				<%= link_to courseNow[0].name, courseNow[0] %></td>
+				<%= link_to course_now[0].get_name, course_now[0] %></td>
 			<%- else -%>
 				<%- if (room_span[r.id].to_i-1) <= 0 -%>
 					<td class="timeTableCell">
